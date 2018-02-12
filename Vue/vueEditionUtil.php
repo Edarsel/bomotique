@@ -71,7 +71,7 @@ var contenuNavbar=$(`
 
     <input type="button" name="ajoutUtil" id="ajoutUtil" value="Enregistrer nouvel utilisateur" onclick="" class="btn btn-primary btn-xs-block">
     <input type="button" name="modifUtil" id="modifUtil" value="Modifier utilisateur" onclick="" class="btn btn-secondary btn-xs-block">
-    <input type="button" name="supprUtil" id="supprUtil" value="Supprimer utilsateur" onclick="" class="btn btn-danger btn-xs-block">
+    <input type="button" name="supprUtil" id="supprUtil" value="Supprimer utilisateur" onclick="" class="btn btn-danger btn-xs-block">
 
   </form>
 

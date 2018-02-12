@@ -28,8 +28,8 @@ var contenuNavbar=$(`
 
 <!-- Rounded switch Source : https://www.w3schools.com/howto/howto_css_switch.asp -->
 <label for="cbxOnOff">État de la LED :</label><br>
-<label class="switch" for="cbxOnOff">
-  <input type="checkbox" id="cbxOnOff" <?= ($_SESSION['LED']) ? "checked" : "" ?>>
+<label class="switch" for="cbxOnOff" id="lblOnOff">
+  <input type="checkbox" id="cbxOnOff" <?= ($_SESSION['LED']) ? "checked" : "" ?> onchange="OnOffLED();">
   <span class="slider round"></span>
 </label>
 

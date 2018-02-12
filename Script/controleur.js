@@ -1,5 +1,30 @@
+function OnOffLED() {
+  console.debug("ON/OFF");
+  $.ajax({
+    url: 'index.php',
+    type: 'POST',
+    data: {action: "LedOnOff"},
+    async: false,
+    success: function (response) {
+      //alert(response);
+      //alert("FONCTIONNE");
+    }
+  });
+}
+
+//APRES QUE LE DOM SOIT PRET
 $( document ).ready(function() {
   console.log("controleur.js est chargé");
+
+
+  var myVar = setInterval(myTimer, 5000);
+
+  async function myTimer() {
+    $.get("index.php?action=pagePrincipale").then(function(page) {
+      $("#lblOnOff").html($(page).find("#lblOnOff").html())
+    })
+  }
+
 
   //Actualisation du formulaire d'édition quand un utilisateur est sélectionné dans la liste
   $(document).on('change', "#listeUtilEdition", function () {
@@ -25,19 +50,19 @@ $( document ).ready(function() {
     })
   })
 
-  $('#cbxOnOff').change(function() {
-    console.debug("ON/OFF");
-    $.ajax({
-      url: 'index.php',
-      type: 'POST',
-      data: {action: "LedOnOff"},
-      async: false,
-      success: function (response) {
-        //alert(response);
-        //alert("FONCTIONNE");
-      }
-    });
-  });
+  // $('#cbxOnOff').change(function() {
+  //   console.debug("ON/OFF");
+  //   $.ajax({
+  //     url: 'index.php',
+  //     type: 'POST',
+  //     data: {action: "LedOnOff"},
+  //     async: false,
+  //     success: function (response) {
+  //       //alert(response);
+  //       //alert("FONCTIONNE");
+  //     }
+  //   });
+  // });
 
   $('#btnImpulsion').click(function () {
 
@@ -71,6 +96,7 @@ $( document ).ready(function() {
         success: function (response) {
           alert(response)
           //actualiserPageEdition()
+          $('#cbxOnOff').prop("checked", false);
         }
       });
     }
@@ -288,7 +314,7 @@ function verifierNomUserUnique(nomUtilisateur, indexUtilisateur) {
 
   $.each(lstUtilisateur, function (key, objUtil) {
     if (objUtil.numero != indexUtilisateur) {
-      if (objUtil.nomUtilisateur == nomUtilisateur) {
+      if ($.trim(objUtil.nomUtilisateur) == $.trim(nomUtilisateur)) {
         estUnique = false;
       }
     }
