@@ -171,10 +171,15 @@ function supprimerUtil() {
 
   if (isset($_POST['idUtil'])) {
     if (protectionXSS($_POST['idUtil']) != null) {
-
       $iIDUtil = protectionXSS($_POST['idUtil']);
 
-      delUtilisateur($iIDUtil);
+      if (!($_SESSION['UtilisateurConnecte']->numero == $iIDUtil))
+      {
+        delUtilisateur($iIDUtil);
+      }else
+      {
+        echo "Vous ne pouvez pas supprimer votre compte utilisateur !";
+      }
       //echo "ID DE L'ELEVE A SUPPRIMER : " . $iIDEleve;
       //echo "L'élève a été supprimé";
     }
@@ -222,100 +227,6 @@ function deconnexion() {
   require 'Vue/vueConnexion.php';
 }
 
-//==================================
-
-
-
-function pageCarte() {
-  require 'Vue\vueCarte.php';
-}
-
-function pageEdition() {
-  require 'Vue\vueEdition.php';
-}
-
-function ajouterEleve() {
-  if (captchaValide()) {
-    $strNom = protectionXSS($_POST['nomEleve']);
-    $strPrenom = protectionXSS($_POST['prenomEleve']);
-    $iClasse = $_POST['classeEleve'];
-    $strRue = protectionXSS($_POST['rueEleve']);
-    $strNumRue = protectionXSS($_POST['rueNumEleve']); //
-    $iLocal = $_POST['localiteEleve'];
-    $strUser = protectionXSS($_POST['userEleve']);
-    $iAdmin = 0;
-    $strMdp = protectionXSS($_POST['mdpEleve']);
-
-    if (isset($_POST['adminEleve'])) {
-      if ($_POST['adminEleve'] == "on") {
-        $iAdmin = 1;
-      }
-    }
-
-    //echo "VALEUR SI EST ADMIN : " . $iAdmin;
-
-    addEleve($strNom, $strPrenom, $iClasse, $strRue, $strNumRue, $iLocal, $strUser, $iAdmin, $strMdp);
-
-  }
-}
-
-function modifierEleve() {
-  if (captchaValide()) {
-    $iIDEleve;
-
-    if (isset($_POST['idEleve'])) {
-      if (protectionXSS($_POST['idEleve']) != null) {
-
-        $iIDEleve = $_POST['idEleve'];
-
-        $strNom = protectionXSS($_POST['nomEleve']);
-        $strPrenom = protectionXSS($_POST['prenomEleve']);
-        $iClasse = $_POST['classeEleve'];
-        $strRue = protectionXSS($_POST['rueEleve']);
-        $strNumRue = protectionXSS($_POST['rueNumEleve']); //
-        $iLocal = $_POST['localiteEleve'];
-        $strUser = protectionXSS($_POST['userEleve']);
-        $iAdmin = 0;
-        $strMdp = protectionXSS($_POST['mdpEleve']);
-
-        if (isset($_POST['adminEleve'])) {
-          if ($_POST['adminEleve'] == "on") {
-            $iAdmin = 1;
-          }
-        }
-
-        //Si pas de nom d'utilisateur = pas de compte = pas de mot de passe
-        if ($strUser == "") {
-          $strUser = null;
-          $strMdp = null;
-        }
-
-        updtEleve($iIDEleve, $strNom, $strPrenom, $iClasse, $strRue, $strNumRue, $iLocal, $strUser, $iAdmin, $strMdp);
-        //echo "L'élève \"" . $strPrenom . " " . $strNom . "\" a été modifié";
-      }
-    }
-  }
-}
-
-function supprimerEleve() {
-  if (captchaValide()) {
-    $iIDEleve;
-
-
-    if (isset($_POST['idEleve'])) {
-      if (protectionXSS($_POST['idEleve']) != null) {
-
-        $iIDEleve = protectionXSS($_POST['idEleve']);
-
-        delEleve($iIDEleve);
-        //echo "ID DE L'ELEVE A SUPPRIMER : " . $iIDEleve;
-        //echo "L'élève a été supprimé";
-      }
-    }
-  }
-}
-
-
 function captchaValide() {
   $googleResponse = false;
 
@@ -344,35 +255,6 @@ function captchaValide() {
     $res = json_decode($response, TRUE);
     if($res['success'] == 'true') {
       $googleResponse = true;}
-
-
-
-
-
-
-      /*
-      // Ma clé privée
-      $secret = "6Le3mjkUAAAAACQWVXbPj5LHOzMIqYKWMt5M0d92";
-
-      // Paramètre renvoyé par le recaptcha
-      $response = $_POST['g-recaptcha-response'];
-
-      // On récupère l'IP de l'utilisateur
-      $remoteip = $_SERVER['REMOTE_ADDR'];
-
-      $api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
-      . $secret
-      . "&response=" . $response
-      . "&remoteip=" . $remoteip;
-
-      $decode = json_decode(file_get_contents($api_url), true);
-
-      if ($decode['success'] == true) {
-      // C'est un humain
-      $googleResponse = true;
-    } else {
-    //echo "ERREUR : Le captcha n'est pas valide !";
-  }*/
 
   return $googleResponse;
 }

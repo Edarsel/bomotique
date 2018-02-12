@@ -61,7 +61,7 @@ var contenuNavbar=$(`
     <p class="h4">Paramètres LED</p>
     <div class="form-group">
       <label for="tempsImpulsion">Temps de l'impulsion :</label><br>
-      <input type="text" id="tempsImpulsion" name="tempsImpulsion" placeholder="1000 millisecondes" />
+      <input type="text" id="tempsImpulsion" name="tempsImpulsion" placeholder="<?= (getTempsImpulsion())->tempsImpulsion; ?> millisecondes" />
     </div>
   </div>
 

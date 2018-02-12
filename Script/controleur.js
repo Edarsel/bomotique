@@ -131,6 +131,7 @@ $( document ).ready(function() {
             //$("#ListBoxUtil").load("index.php?action=pageEditionUtil #ListBoxUtil");
 
             //Nouvelle méthode qui remplace le ".load"
+            //Pour recharger la listbox
             $.get("index.php?action=pageEditionUtil").then(function(page) {
               $("#ListBoxUtil").html($(page).find("#ListBoxUtil").html())
             })
@@ -182,8 +183,11 @@ $( document ).ready(function() {
               $("#formEdition #action").val('modifierUtil');
               ajaxModifUtil();
 
-              //Rechargement de la page
-              window.location.replace(location.href + "?action=pageEditionUtil");
+              //Pour recharger la listbox
+              $.get("index.php?action=pageEditionUtil").then(function(page) {
+                $("#ListBoxUtil").html($(page).find("#ListBoxUtil").html())
+              })
+
             }
             else {
               alert("Les 2 mot de passes ne correspondent pas !")
@@ -196,8 +200,10 @@ $( document ).ready(function() {
             $("#formEdition #action").val('modifierUtil');
             ajaxModifUtil();
 
-            //Rechargement de la page
-            window.location.replace(location.href + "?action=pageEditionUtil");
+            //Pour recharger la listbox
+            $.get("index.php?action=pageEditionUtil").then(function(page) {
+              $("#ListBoxUtil").html($(page).find("#ListBoxUtil").html())
+            })
           }
         }
         else
@@ -263,7 +269,7 @@ $( document ).ready(function() {
         });
 
         //Rechargement de la page
-        window.location.replace(location.href + "?action=pageEditionUtil");
+        window.location.replace(location.href);
       }
       else
       {
