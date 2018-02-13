@@ -3,6 +3,7 @@ session_start();
 
 require 'Modele/modele.php';
 require 'Modele/app_modele.php';
+require 'Modele/user_modele.php';
 require 'Controleur/user_controleur.php';
 require 'Controleur/controleur.php';
 

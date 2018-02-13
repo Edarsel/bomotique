@@ -8,8 +8,10 @@
   <!--POLICE D'ECRITURE-->
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
+  <!-- Titre -->
+  <title id="titrePage" >Bomotique - Connexion</title>
 
-  <title id="titrePage" >Bomotique - Connexion</title>   <!-- Élément spécifique -->
+  <!-- JQUERY / JQUERY-UI-->
   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -25,10 +27,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <!-- Bootstrap - Toggle Switch-->
-  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-
+  <!-- Script controleur -->
   <script src="Script/controleur.js" defer></script>
 
   <!-- Feuille de style CSS -->

@@ -10,6 +10,42 @@ function getModeConnexion() {
     return $objModeConnexion['estEnModePassword'];
 }
 
+function uptModeConnexion($iModeCo, $strMdp) {
+
+  $bdd = getBdd();
+  $stmt;
+
+  if ($iModeCo ==1) {
+
+    $stmt = $bdd->prepare('UPDATE `tbl_application` '
+    . 'SET '
+    . 'estEnModePassword = :modePass,'
+    . 'motDePasse =:mdp '
+    . 'WHERE '
+    . 'numero = 1');
+
+    $stmt->bindParam(':mdp', $strMdp, PDO::PARAM_STR);
+
+  } else {
+    $stmt = $bdd->prepare('UPDATE tbl_application '
+    . 'SET '
+    . 'estEnModePassword = :modePass '
+    . 'WHERE '
+    . 'numero = 1');
+  }
+
+  $stmt->bindParam(':modePass', $iModeCo, PDO::PARAM_BOOL);
+
+  if ($stmt->execute()) {
+    echo "Le mode de connexion a été changé.";
+  } else {
+    echo "ERREUR : Le mode de connexion n'a pas pu être changé.";
+  }
+
+  return $bdd->errorInfo();
+}
+
+
 function getInfoApplication() {
     $bdd = getBdd();
     $stmt = $bdd->prepare('SELECT * FROM tbl_application');
