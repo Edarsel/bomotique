@@ -22,7 +22,6 @@ function LedImpulsion(){
 }
 
 function LedOnOff(){
-
   exec('echo out > /sys/class/gpio/gpio68/direction');
 
   if ($_SESSION['LED']==1)
@@ -218,13 +217,6 @@ function enregistrerAdminLED()
   else{
     echo "ERREUR la valeur de l'impulsion n'a pas été modifié";
   }
-}
-
-function deconnexion() {
-  session_destroy();
-  $pseudo = "";
-  $mdp = "";
-  require 'Vue/vueConnexion.php';
 }
 
 function captchaValide() {

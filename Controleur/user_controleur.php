@@ -66,7 +66,7 @@ function connexion() {
                         require 'Vue/vueConnexion.php';
                         erreurConnexion();
                     }
-                    
+
                 } else {
                     require 'Vue/vueConnexion.php';
                     echo '<script>';
@@ -85,7 +85,7 @@ function connexion() {
 
 function connexionAdmin(){
     $pseudo = "";
-    
+
     if (isset($_POST['pseudo']) && isset($_POST['pass']))
     {
         if ((protectionXSS($_POST['pseudo'])) != "") {
@@ -113,7 +113,7 @@ function connexionAdmin(){
                         require 'Vue/vueConnexionAdmin.php';
                         erreurConnexion();
                     }
-                    
+
                 } else {
                     require 'Vue/vueConnexionAdmin.php';
                     echo '<script>';
@@ -150,4 +150,11 @@ function erreurConnexion() {
 function hashMotDePasse($strMdp){
     $strMdp = password_hash($strMdp,PASSWORD_BCRYPT);
     return $strMdp;
+}
+
+function deconnexion() {
+  session_destroy();
+  $pseudo = "";
+  $mdp = "";
+  require 'Vue/vueConnexion.php';
 }

@@ -7,7 +7,6 @@ function OnOffLED() {
     async: false,
     success: function (response) {
       //alert(response);
-      //alert("FONCTIONNE");
     }
   });
 }
@@ -16,10 +15,9 @@ function OnOffLED() {
 $( document ).ready(function() {
   console.log("controleur.js est chargé");
 
+  var myVar = setInterval(updtEtatLed, 5000);
 
-  var myVar = setInterval(myTimer, 5000);
-
-  async function myTimer() {
+  async function updtEtatLed() {
     $.get("index.php?action=pagePrincipale").then(function(page) {
       $("#lblOnOff").html($(page).find("#lblOnOff").html())
     })
@@ -66,17 +64,17 @@ $( document ).ready(function() {
 
   $('#btnImpulsion').click(function () {
 
-      $.ajax({
-        url: 'index.php',
-        type: 'POST',
-        data: {action: "Impulsion"},
-        async: false,
-        success: function (response) {
-          console.debug("Fin du chrono");
-          //alert(response)
-          //actualiserPageEdition()
-        }
-      });
+    $.ajax({
+      url: 'index.php',
+      type: 'POST',
+      data: {action: "Impulsion"},
+      async: false,
+      success: function (response) {
+        console.debug("Fin du chrono");
+        //alert(response)
+        //actualiserPageEdition()
+      }
+    });
   });
 
   $('#enrImpulsLED').click(function () {

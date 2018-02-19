@@ -51,7 +51,7 @@ var contenuNavbar=$(`
 
   </div>
   <input type="hidden" name="action" id="action" value="enregistrerAdmin">
-  <input type='button' name="enrModeCo" id="enrModeCo" value="Enregistrer" class="btn btn-primary" /><br>
+  <input type='button' name="enrModeCo" id="enrModeCo" value="Enregistrer Mode de Connexion" class="btn btn-primary" /><br>
 </form><br>
 
 <!-- FORMULAIRE DES PARAMETRES DE LA LED -->
@@ -66,7 +66,7 @@ var contenuNavbar=$(`
   </div>
 
   <input type="hidden" name="action" id="action" value="enregistrerAdminLED">
-  <input type='button' name="enrImpulsLED" id="enrImpulsLED" value="Enregistrer" class="btn btn-primary" /><br>
+  <input type='button' name="enrImpulsLED" id="enrImpulsLED" value="Enregistrer Paramètres LED" class="btn btn-primary" /><br>
 </form>
 
 <?php
