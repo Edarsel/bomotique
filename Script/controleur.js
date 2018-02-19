@@ -47,21 +47,7 @@ $( document ).ready(function() {
       }
     })
   })
-
-  // $('#cbxOnOff').change(function() {
-  //   console.debug("ON/OFF");
-  //   $.ajax({
-  //     url: 'index.php',
-  //     type: 'POST',
-  //     data: {action: "LedOnOff"},
-  //     async: false,
-  //     success: function (response) {
-  //       //alert(response);
-  //       //alert("FONCTIONNE");
-  //     }
-  //   });
-  // });
-
+  
   $('#btnImpulsion').click(function () {
 
     $.ajax({

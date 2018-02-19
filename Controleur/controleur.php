@@ -22,16 +22,17 @@ function LedImpulsion(){
 }
 
 function LedOnOff(){
+  //Configuration en sortie du port
   exec('echo out > /sys/class/gpio/gpio68/direction');
 
   if ($_SESSION['LED']==1)
   {
+    //Pour éteindre le port
     exec('echo 0 > /sys/class/gpio/gpio68/value');
-    //echo "ETEINT";
   }
   elseif ($_SESSION['LED']==0){
+    //Pour allumer le port
     exec('echo 1 > /sys/class/gpio/gpio68/value');
-    //echo "ALLUME";
   }
 
   $_SESSION['LED'] = (int)exec('cat /sys/class/gpio/gpio68/value');
@@ -123,11 +124,7 @@ function ajouterUtil()
     }
   }
 
-  //echo "VALEUR SI EST ADMIN : " . $iAdmin;
-
   addUtilisateur($strNomUtil, $iAdmin, $strMdp);
-
-
 }
 
 function modifierUtil() {
@@ -157,7 +154,6 @@ function modifierUtil() {
       }
 
       updtUtilisateur($iIDUtil, $strNomUtil, $iAdmin, $strMdp);
-      //echo "L'élève \"" . $strPrenom . " " . $strNom . "\" a été modifié";
     }
   }
 
@@ -179,8 +175,6 @@ function supprimerUtil() {
       {
         echo "Vous ne pouvez pas supprimer votre compte utilisateur !";
       }
-      //echo "ID DE L'ELEVE A SUPPRIMER : " . $iIDEleve;
-      //echo "L'élève a été supprimé";
     }
   }
 
@@ -223,11 +217,8 @@ function captchaValide() {
   $googleResponse = false;
 
   $response = $_POST['g-recaptcha-response'];
-  $google_url = "https://www.google.com/recaptcha/api/siteverify";
   $secret = '6Le3mjkUAAAAACQWVXbPj5LHOzMIqYKWMt5M0d92';
-  $remoteip = $_SERVER['REMOTE_ADDR'];
 
-  $url = $google_url."?secret=".$secret."&response=".$response;
 
   $data = array(
     'secret' => $secret,
