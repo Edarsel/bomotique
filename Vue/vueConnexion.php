@@ -1,5 +1,6 @@
 <?php
-ob_start()
+ob_start();
+//echo $_COOKIE["identification"];
 ?>
 <script type="text/javascript">
     $('#titrePage').text("Bomotique - Connexion")

@@ -23,9 +23,6 @@ var contenuNavbar=$(`
 
 <br><br>
 
-
-<!-- <input id="cbxOnOff" data-toggle="toggle" <?php //echo ($_SESSION['LED']) ? "checked" : "" ?> type="checkbox" data-onstyle="primary" data-offstyle="danger"> -->
-
 <!-- Rounded switch Source : https://www.w3schools.com/howto/howto_css_switch.asp -->
 <label for="cbxOnOff">État de la LED :</label><br>
 <label class="switch" for="cbxOnOff" id="lblOnOff">

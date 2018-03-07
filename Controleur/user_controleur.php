@@ -1,7 +1,5 @@
 <?php
 
-//echo "<h1>TEST CONTROLEUR !!!</h1>";
-
 function connexion() {
     $pseudo = "";
     $mdp = "";
@@ -41,6 +39,7 @@ function connexion() {
             erreurConnexion();
         }
     }
+    //Si vrai => Mode utilisateur
     else if (isset($_POST['pseudo']) && isset($_POST['pass']) && !($_SESSION['modeConnexion']))
     {
         if ((protectionXSS($_POST['pseudo'])) != "") {

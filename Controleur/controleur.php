@@ -228,6 +228,7 @@ function captchaValide() {
   $verify = curl_init();
   curl_setopt($verify, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
     curl_setopt($verify, CURLOPT_POST, true);
+    //Converti le tableau en chaîne de requête en encodage URL (secret=1234&response=1234)
     curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
     curl_setopt($verify, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
@@ -235,9 +236,11 @@ function captchaValide() {
 
     curl_close($verify);
 
+    //Converti la chaine JSON vers un tableau associatif
     $res = json_decode($response, TRUE);
     if($res['success'] == 'true') {
-      $googleResponse = true;}
+      $googleResponse = true;
+    }
 
   return $googleResponse;
 }

@@ -9,7 +9,7 @@ function getBdd() {
   if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
     $bdd = new PDO('mysql:host=localhost;dbname=bomotique;charset=utf8', 'root', '');
   } else {
-    $bdd = new PDO('mysql:host=localhost;dbname=bomotique;charset=utf8', 'phpmyadmin', 'pass1234');
+    $bdd = new PDO('mysql:host=localhost;dbname=bomotique;charset=utf8', 'root', 'Pass1234');
   }
 
   //$bdd = new PDO('mysql:host=localhost;dbname=bomotique;charset=utf8', 'phpmyadmin', 'pass1234');

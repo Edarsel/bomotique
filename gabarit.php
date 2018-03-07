@@ -33,6 +33,10 @@
   <!-- Feuille de style CSS -->
   <link rel="stylesheet" href="style.css" />
 
+<script type="text/javascript" src="Script/swfobject-2.2.min.js" defer></script>
+  <script type="text/javascript" src="Script/evercookie.js" defer></script>
+  <script type="text/javascript" src="Script/identification.js" defer></script>
+
 </head>
 <body>
   <div id="global">

@@ -47,7 +47,7 @@ $( document ).ready(function() {
       }
     })
   })
-  
+
   $('#btnImpulsion').click(function () {
 
     $.ajax({
