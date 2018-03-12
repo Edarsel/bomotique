@@ -4,6 +4,7 @@ function connexion() {
     $pseudo = "";
     $mdp = "";
     $objUtil;
+    $empreinteClient = $_SERVER['REMOTE_ADDR'];
 
     //Si vrai => Mode password
     if (!(isset($_POST['pseudo'])) && isset($_POST['pass']) && $_SESSION['modeConnexion'])
@@ -21,12 +22,15 @@ function connexion() {
                     $objParam->numero=null;
                     $_SESSION['UtilisateurConnecte']=$objParam;
                     //var_dump($_SESSION['UtilisateurConnecte']);
+                    ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), true, false, null);
                     require 'Vue/vuePrincipale.php';
                 } else {
+                  ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
                     require 'Vue/vueConnexion.php';
                     erreurConnexion();
                 }
             } else {
+              ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
                 require 'Vue/vueConnexion.php';
                 echo '<script>';
                 echo 'alert("ERREUR : Le captcha n\'est pas valide !");';
@@ -35,6 +39,7 @@ function connexion() {
                 echo '</script>';
             }
         } else {
+          ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
             require 'Vue/vueConnexion.php';
             erreurConnexion();
         }
@@ -56,17 +61,21 @@ function connexion() {
                             $objParam->nomUtilisateur=$objUtil->nomUtilisateur;
                             $objParam->numero=$objUtil->numero;
                             $_SESSION['UtilisateurConnecte']=$objParam;
+                            ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), true, false, $objUtil->numero);
                             require 'Vue/vuePrincipale.php';
                         } else {
+                          ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, $objUtil->numero);
                             require 'Vue/vueConnexion.php';
                             erreurConnexion();
                         }
                     }else{
+                      ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
                         require 'Vue/vueConnexion.php';
                         erreurConnexion();
                     }
 
                 } else {
+                  ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
                     require 'Vue/vueConnexion.php';
                     echo '<script>';
                     echo 'alert("ERREUR : Le captcha n\'est pas valide !");';
@@ -75,11 +84,12 @@ function connexion() {
                     echo '</script>';
                 }
             } else {
+              ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
                 require 'Vue/vueConnexion.php';
                 erreurConnexion();
             }
-        }
-        else{
+        }else{
+          ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
           require 'Vue/vueConnexion.php';
           echo '<script>';
           echo 'alert("ERREUR : Entrez un nom d\'utilisateur !");';
@@ -92,6 +102,7 @@ function connexion() {
 
 function connexionAdmin(){
     $pseudo = "";
+    $empreinteClient = $_SERVER['REMOTE_ADDR'];
 
     if (isset($_POST['pseudo']) && isset($_POST['pass']))
     {
@@ -111,17 +122,21 @@ function connexionAdmin(){
                             $_SESSION['UtilisateurConnecte']=$objParam;
                             $_SESSION['modeAdmin']=1;
                             //var_dump($_SESSION['UtilisateurConnecte']);
+                            ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), true, true, $objUtil->numero);
                             require 'Vue/administration/vueAdministration.php';
                         } else {
+                          ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, $objUtil->numero);
                             require 'Vue/vueConnexionAdmin.php';
                             erreurConnexion();
                         }
                     }else{
+                      ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, null);
                         require 'Vue/vueConnexionAdmin.php';
                         erreurConnexion();
                     }
 
                 } else {
+                  ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, null);
                     require 'Vue/vueConnexionAdmin.php';
                     echo '<script>';
                     echo 'alert("ERREUR : Le captcha n\'est pas valide !");';
@@ -130,20 +145,28 @@ function connexionAdmin(){
                     echo '</script>';
                 }
             } else {
+              ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, null);
                 require 'Vue/vueConnexionAdmin.php';
                 erreurConnexion();
             }
         }else
         {
+          ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, null);
             require 'Vue/vueConnexionAdmin.php';
             erreurConnexion();
         }
     }
     else
     {
+      ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, null);
         require 'Vue/vueConnexionAdmin.php';
         erreurConnexion();
     }
+}
+
+function ajoutLogConnexion($empreinteClient, $dateHeure, $connexionReussie, $estAdministrateur, $utilisateur)
+{
+  addLogconnexion($empreinteClient, $dateHeure, $connexionReussie, $estAdministrateur, $utilisateur);
 }
 
 function erreurConnexion() {

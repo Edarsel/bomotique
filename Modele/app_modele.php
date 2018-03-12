@@ -45,6 +45,35 @@ function uptModeConnexion($iModeCo, $strMdp) {
   return $bdd->errorInfo();
 }
 
+function addLogconnexion($empreinteClient, $dateHeure, $connexionReussie, $estAdministrateur, $utilisateur) {
+  $bdd = getBdd();
+  $stmt = $bdd->prepare('INSERT INTO tbl_log_connexion'
+  . '('
+  . 'empreinteClient, '
+  . 'dateHeure, '
+  . 'connexionReussie, '
+  . 'estAdministrateur, '
+  . 'num_tbl_utilisateur '
+  . ') '
+  . 'VALUES '
+  . '('
+  . ':client,'
+  . ':dateHeure,'
+  . ':coReussie,'
+  . ':estAdmin,'
+  . ':numUtil'
+  . ')');
+
+  $stmt->bindParam(':client', $empreinteClient, PDO::PARAM_STR);
+  $stmt->bindParam(':dateHeure', $dateHeure, PDO::PARAM_STR);
+  $stmt->bindParam(':coReussie', $connexionReussie, PDO::PARAM_BOOL);
+  $stmt->bindParam(':estAdmin', $estAdministrateur, PDO::PARAM_BOOL);
+  $stmt->bindParam(':numUtil', $utilisateur, PDO::PARAM_INT);
+
+  $stmt->execute();
+  return $bdd->errorInfo();
+}
+
 
 function getInfoApplication() {
     $bdd = getBdd();
