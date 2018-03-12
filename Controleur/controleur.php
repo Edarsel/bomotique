@@ -95,7 +95,7 @@ function pageEditionUtil()
 {
   if ($_SESSION['UtilisateurConnecte']->estAdministrateur)
   {
-    require 'Vue/vueEditionUtil.php';
+    require 'Vue/administration/vueEditionUtil.php';
   }else{
     pageConnexion();
   }
@@ -104,7 +104,7 @@ function pageEditionUtil()
 function pageAdministration(){
   if ($_SESSION['UtilisateurConnecte']->estAdministrateur)
   {
-    require 'Vue/vueAdministration.php';
+    require 'Vue/administration/vueAdministration.php';
   }else{
     pageConnexion();
   }

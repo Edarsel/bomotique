@@ -79,6 +79,14 @@ function connexion() {
                 erreurConnexion();
             }
         }
+        else{
+          require 'Vue/vueConnexion.php';
+          echo '<script>';
+          echo 'alert("ERREUR : Entrez un nom d\'utilisateur !");';
+          echo "$('#pass').val('');";
+          echo "$('#pass').focus();";
+          echo '</script>';
+        }
     }
 }
 
@@ -103,7 +111,7 @@ function connexionAdmin(){
                             $_SESSION['UtilisateurConnecte']=$objParam;
                             $_SESSION['modeAdmin']=1;
                             //var_dump($_SESSION['UtilisateurConnecte']);
-                            require 'Vue/vueAdministration.php';
+                            require 'Vue/administration/vueAdministration.php';
                         } else {
                             require 'Vue/vueConnexionAdmin.php';
                             erreurConnexion();
