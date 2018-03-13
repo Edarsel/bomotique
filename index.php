@@ -20,11 +20,14 @@ if (isset($_SESSION['modeAdmin'])) {
       case "deconnexion":
       deconnexion();
       break;
-      case "enregistrerAdmin":
-      enregistrerAdmin();
+      case "enregistrerParamConnexion":
+      enregistrerParamConnexion();
       break;
-      case "enregistrerAdminLED":
-      enregistrerAdminLED();
+      case "enregistrerParamLED":
+      enregistrerParamLED();
+      break;
+      case "enregistrerParamSecurite":
+      enregistrerParamSecurite();
       break;
       case "ajouterUtil":
       ajouterUtil();
@@ -50,6 +53,9 @@ if (isset($_SESSION['modeAdmin'])) {
         break;
         case "pageEditionUtil":
         pageEditionUtil();
+        break;
+        case "pageLogsConnexion":
+        pageLogsConnexion();
         break;
         case "deconnexion":
         deconnexion();

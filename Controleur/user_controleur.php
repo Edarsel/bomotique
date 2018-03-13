@@ -104,6 +104,8 @@ function connexionAdmin(){
     $pseudo = "";
     $empreinteClient = $_SERVER['REMOTE_ADDR'];
 
+
+
     if (isset($_POST['pseudo']) && isset($_POST['pass']))
     {
         if ((protectionXSS($_POST['pseudo'])) != "") {
@@ -128,11 +130,13 @@ function connexionAdmin(){
                           ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, $objUtil->numero);
                             require 'Vue/vueConnexionAdmin.php';
                             erreurConnexion();
+                            echo "PASS6";
                         }
                     }else{
                       ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, null);
                         require 'Vue/vueConnexionAdmin.php';
                         erreurConnexion();
+                        echo "PASS5";
                     }
 
                 } else {

@@ -110,6 +110,16 @@ function pageAdministration(){
   }
 }
 
+function pageLogsConnexion(){
+  if ($_SESSION['UtilisateurConnecte']->estAdministrateur)
+  {
+    $listeLogs = getLogsConnexion();
+    require 'Vue/administration/vueLogsConnexion.php';
+  }else{
+    pageConnexion();
+  }
+}
+
 function ajouterUtil()
 {
 
@@ -180,7 +190,7 @@ function supprimerUtil() {
 
 }
 
-function enregistrerAdmin()
+function enregistrerParamConnexion()
 {
   if (isset($_POST['modeConnexion']))
   {
@@ -201,7 +211,7 @@ function enregistrerAdmin()
   }
 }
 
-function enregistrerAdminLED()
+function enregistrerParamLED()
 {
   if (isset($_POST['tempsImpulsion']))
   {
@@ -210,6 +220,30 @@ function enregistrerAdminLED()
   }
   else{
     echo "ERREUR la valeur de l'impulsion n'a pas été modifié";
+  }
+}
+
+function enregistrerParamSecurite()
+{
+  if (isset($_POST['nbTentative']) && isset($_POST['tempsInterTenta']) && isset($_POST['tempsBlocage']))
+  {
+    $nbTentative = $_POST['nbTentative'];
+    $tempsInterTenta = $_POST['tempsInterTenta'];
+    $tempsBlocage = $_POST['tempsBlocage'];
+
+    if (is_null($nbTentative) == false && is_int((int)$nbTentative) && (int)$nbTentative > 0)
+    {
+      $tempsBlocage = date('H:i:s', strtotime($tempsBlocage));
+      $tempsInterTenta = date('H:i:s', strtotime($tempsInterTenta));
+
+      uptParamSecurite($nbTentative,$tempsInterTenta,$tempsBlocage);
+    }
+    else{
+      echo "ERREUR ! Entrez un nombre entier !";
+    }
+  }
+  else{
+    echo "ERREUR mode connexion";
   }
 }
 

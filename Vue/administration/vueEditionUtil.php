@@ -2,26 +2,13 @@
 ob_start();
 
 $listeUtilisateur;
+require('Vue\administration\menuAdministration.php');
 ?>
 <script type="text/javascript">
 $('#titrePage').text("Bomotique - Gestion Utilisateurs");
 $('#titreContenu').text("Gestion Utilisateurs");
 
 var lstUtilisateur;
-
-var contenuNavbar=$(`
-  <ul class="navbar-nav">
-  <li class="nav-item">
-  <a class="nav-link" href="index.php?action=pageAdministration">Page Administration</a>
-  </li>
-  <li class="nav-item">
-  <a class="nav-link" href="index.php?action=pageEditionUtil">Gestion Utilisateurs</a>
-  </li>
-  <li class="nav-item">
-  <a class="nav-link" href="index.php?action=deconnexion">Déconnexion</a>
-  </li>
-  </ul>`);
-  $('#nav-content').html(contenuNavbar);
 </script>
 
 

@@ -2,7 +2,7 @@
 
 function getUtilisateur($strNomUtil) {
   $bdd = getBdd();
-  $stmt = $bdd->prepare('SELECT * FROM `tbl_utilisateurs` WHERE nomUtilisateur = :nomUtil');
+  $stmt = $bdd->prepare('SELECT * FROM `tbl_utilisateur` WHERE nomUtilisateur = :nomUtil');
   $stmt->bindParam(':nomUtil', $strNomUtil, PDO::PARAM_STR);
   $stmt->execute();
   $objUtilisateur = $stmt->fetch(PDO::FETCH_OBJ);
@@ -11,7 +11,7 @@ function getUtilisateur($strNomUtil) {
 
 function getUtilisateurs() {
   $bdd = getBdd();
-  $stmt = $bdd->prepare('SELECT * FROM `tbl_utilisateurs`');
+  $stmt = $bdd->prepare('SELECT * FROM `tbl_utilisateur`');
   $stmt->execute();
   $objListeUtil = $stmt->fetchAll(PDO::FETCH_OBJ);
   return $objListeUtil;
@@ -20,7 +20,7 @@ function getUtilisateurs() {
 function addUtilisateur($strNomUtil, $iAdmin, $strMdp) {
 
   $bdd = getBdd();
-  $stmt = $bdd->prepare('INSERT INTO tbl_utilisateurs'
+  $stmt = $bdd->prepare('INSERT INTO tbl_utilisateur'
   . '('
   . 'nomUtilisateur, '
   . 'motDePasse, '
@@ -54,7 +54,7 @@ function updtUtilisateur($iIDUtil, $strNomUtil, $iAdmin, $strMdp) {
 
   if ($strMdp) {
 
-    $stmt = $bdd->prepare('UPDATE `tbl_utilisateurs` '
+    $stmt = $bdd->prepare('UPDATE `tbl_utilisateur` '
     . 'SET '
     . 'nomUtilisateur = :nomUtil,'
     . 'motDePasse =:mdp,'
@@ -65,7 +65,7 @@ function updtUtilisateur($iIDUtil, $strNomUtil, $iAdmin, $strMdp) {
     $stmt->bindParam(':mdp', $strMdp, PDO::PARAM_STR);
 
   } else {
-    $stmt = $bdd->prepare('UPDATE tbl_utilisateurs '
+    $stmt = $bdd->prepare('UPDATE tbl_utilisateur '
     . 'SET '
     . 'nomUtilisateur = :nomUtil,'
     . 'estAdministrateur = :estAdmin '
@@ -89,7 +89,7 @@ function updtUtilisateur($iIDUtil, $strNomUtil, $iAdmin, $strMdp) {
 function delUtilisateur($iIDUtil) {
 
   $bdd = getBdd();
-  $stmt = $bdd->prepare('DELETE FROM `tbl_utilisateurs` WHERE numero = :idUtil');
+  $stmt = $bdd->prepare('DELETE FROM `tbl_utilisateur` WHERE numero = :idUtil');
 
   $stmt->bindParam(':idUtil', $iIDUtil, PDO::PARAM_INT);
 

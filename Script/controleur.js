@@ -24,6 +24,7 @@ $( document ).ready(function() {
   }
 
 
+
   //Actualisation du formulaire d'édition quand un utilisateur est sélectionné dans la liste
   $(document).on('change', "#listeUtilEdition", function () {
     //$('#listeUtilEdition').change(function () {
@@ -48,6 +49,14 @@ $( document ).ready(function() {
     })
   })
 
+  //Ordonner le tableau avec le script DataTables.net
+  var table = $('#tableauLogsConnexion').DataTable();
+  //Trier les données du plus récent au plus vieux
+  table
+  .column( '0' )
+  .order( 'desc' )
+  .draw();
+
   $('#btnImpulsion').click(function () {
 
     $.ajax({
@@ -63,6 +72,19 @@ $( document ).ready(function() {
     });
   });
 
+  $('#enrParamSecu').click(function () {
+
+      $.ajax({
+        url: 'index.php',
+        type: 'POST',
+        data: $('#formParamSecurite').serialize(),
+        async: false,
+        success: function (response) {
+          alert(response);
+        }
+      });
+  });
+
   $('#enrImpulsLED').click(function () {
     var iTemps = $.trim($('#tempsImpulsion').val());
 
@@ -75,7 +97,7 @@ $( document ).ready(function() {
       $.ajax({
         url: 'index.php',
         type: 'POST',
-        data: $('#formAdminLED').serialize(),
+        data: $('#formParamLED').serialize(),
         async: false,
         success: function (response) {
           alert(response)
@@ -115,7 +137,7 @@ $( document ).ready(function() {
       $.ajax({
         url: 'index.php',
         type: 'POST',
-        data: $('#formAdmin').serialize(),
+        data: $('#formParamConnexion').serialize(),
         async: false,
         success: function (response) {
           alert(response)

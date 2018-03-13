@@ -1,7 +1,8 @@
 <!-- FORMULAIRE DES PARAMETRES DE CONNEXION-->
-<form method="post" action="index.php" name="formAdmin" id="formAdmin" autocomplete="off">
+<p class="h4" data-toggle="collapse" data-target="#formParamConnexion" aria-expanded="false" aria-controls="formParamConnexion">Mode de connexion <img src="chevron-down.svg" height="30px" width="30px" /></p>
+<form method="post" action="index.php" name="formParamConnexion" id="formParamConnexion" autocomplete="off" class="collapse show">
   <div class="custom-controls-stacked">
-    <p class="h4">Mode de connexion</p>
+
     <label class="custom-control custom-radio">
       <input type="radio" name="modeConnexion" id="modeCoMDP" value="1" checked class="custom-control-input">
       <span class="custom-control-indicator"></span>
@@ -26,6 +27,6 @@
     </fieldset>
 
   </div>
-  <input type="hidden" name="action" id="action" value="enregistrerAdmin">
+  <input type="hidden" name="action" id="action" value="enregistrerParamConnexion">
   <input type='button' name="enrModeCo" id="enrModeCo" value="Enregistrer Mode de Connexion" class="btn btn-primary" /><br>
 </form>

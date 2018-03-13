@@ -110,3 +110,39 @@ function getTempsImpulsion() {
   $tempsImpuls = $stmt->fetch(PDO::FETCH_OBJ);
   return $tempsImpuls;
 }
+
+
+function getLogsConnexion() {
+  $bdd = getBdd();
+  $stmt = $bdd->prepare('SELECT `tbl_log_connexion`.*, `tbl_utilisateur`.`nomUtilisateur`
+FROM `tbl_log_connexion`
+LEFT JOIN `tbl_utilisateur` ON `tbl_log_connexion`.`num_tbl_utilisateur` = `tbl_utilisateur`.`numero`
+ORDER BY `dateHeure` DESC');
+  $stmt->execute();
+  $listeLogs = $stmt->fetchAll(PDO::FETCH_OBJ);
+  return $listeLogs;
+}
+
+function uptParamSecurite($nbTentative,$tempsInterTenta,$tempsBlocage) {
+
+  $bdd = getBdd();
+  $stmt = $bdd->prepare('UPDATE `tbl_application` '
+  . 'SET '
+  . 'nbTentative = :nombreTentative, '
+  . 'tempsBlocage = :tempsBlocage, '
+  . 'tempsIntervaleTentative = :tempsIntervaleTentative '
+  . 'WHERE '
+  . 'numero = 1');
+
+  $stmt->bindParam(':nombreTentative', $nbTentative, PDO::PARAM_INT);
+  $stmt->bindParam(':tempsBlocage', $tempsBlocage, PDO::PARAM_STR);
+  $stmt->bindParam(':tempsIntervaleTentative', $tempsInterTenta, PDO::PARAM_STR);
+
+  if ($stmt->execute()) {
+    echo "Les paramètres ont été enregistrés.";
+  } else {
+    echo "ERREUR : Les paramètres n'ont pas pu être enregistrés.";
+  }
+
+  return $bdd->errorInfo();
+}

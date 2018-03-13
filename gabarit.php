@@ -27,6 +27,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+  <!-- Script DataTables (tri des tableaux) https://datatables.net/examples/styling/bootstrap4.html -->
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
+
   <!-- Script controleur -->
   <script src="Script/controleur.js" defer></script>
 
@@ -57,7 +62,7 @@
 </nav>
 
 </header>
-<div id="contenu" class="card" style="max-width: 40rem;">
+<div id="contenu" class="card" >
   <h2 class="card-header" id="titreContenu">Titre Page</h2>
   <div class="card-body">
     <?= $contenu ?>   <!-- Élément spécifique -->
