@@ -168,6 +168,64 @@ function connexionAdmin(){
     }
 }
 
+function verifierCompteBloque($idUtilisateur){
+  $listeLogsUtil = getLogsConnexionParUtilisateur($idUtilisateur);
+  $parametreApplication = getInfoApplication();
+
+  $diffTemps = date("Y-m-d H:i:s",strtotime("now") - strtotime($listeLogsUtil[0]->dateHeure));
+  $tempsBlocage = date('1970-01-01 H:i:s',strtotime($parametreApplication->tempsBlocage));
+  $tempsIntervale = date('1970-01-01 H:i:s',strtotime($parametreApplication->tempsIntervaleTentative));
+  //Y-m-d H:i:s
+  // echo $diffTemps."\n";
+  // echo $tempsBlocage."\n";
+  // echo $tempsIntervale."\n";
+
+  if ($diffTemps < $tempsBlocage)
+  {
+
+    $i=0;
+    $finTentative = false;
+
+    $Temps = strtotime("now");
+    $TempsPrecedent = strtotime($listeLogsUtil[$i]->dateHeure);
+    $diffTemps = date("Y-m-d H:i:s", $Temps - $TempsPrecedent);
+
+    while ($finTentative == false) {
+
+      if ($listeLogsUtil[$i]->connexionReussie) {
+        $finTentative = true;
+        $i+=1;
+      }
+      else if ($diffTemps  < $tempsIntervale) {
+        echo $diffTemps."\n";
+        // echo $Temps."\n";
+        // echo $TempsPrecedent."\n";
+        $i+=1;
+      }
+      else {
+        $finTentative = true;
+        $i+=1;
+      }
+
+      $Temps = strtotime($listeLogsUtil[$i]->dateHeure);
+      $TempsPrecedent = strtotime($listeLogsUtil[$i+1]->dateHeure);
+      $diffTemps = date("Y-m-d H:i:s", $Temps - $TempsPrecedent);
+    }
+    echo $i;
+
+
+    if ($i >= $parametreApplication->nbTentative) {
+      echo "BLOQUE";
+    }
+    else {
+      echo "PAS BLOQUE 1";
+    }
+  }
+  else{
+    echo "PAS BLOQUE";
+  }
+}
+
 function ajoutLogConnexion($empreinteClient, $dateHeure, $connexionReussie, $estAdministrateur, $utilisateur)
 {
   addLogconnexion($empreinteClient, $dateHeure, $connexionReussie, $estAdministrateur, $utilisateur);

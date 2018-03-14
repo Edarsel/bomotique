@@ -16,7 +16,7 @@ $('#titreContenu').text("Logs de connexion");
       <th scope="col">IP client</th>
       <th scope="col">Date/Heure</th>
       <th scope="col">Connexion réussie</th>
-      <th scope="col">Administrateur</th>
+      <th scope="col">Type de connexion</th>
       <th scope="col">Compte utilisateur</th>
     </tr>
   </thead>
@@ -28,7 +28,7 @@ $('#titreContenu').text("Logs de connexion");
         echo "<td>".$log->empreinteClient."</td>";
         echo "<td>".$log->dateHeure."</td>";
         echo "<td>".($log->connexionReussie == 1 ? "OUI" : "NON")."</td>";
-        echo "<td>".($log->estAdministrateur == 1 ? "OUI" : "NON")."</td>";
+        echo "<td>".($log->estAdministrateur == 1 ? "Administrateur" : "Utilisateur")."</td>";
         echo "<td>".$log->nomUtilisateur."</td>";
         echo "</tr>";
       }
