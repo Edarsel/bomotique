@@ -1,7 +1,7 @@
 <?php
 ob_start();
-//var_dump(getLogsConnexionParUtilisateur(2));
-verifierCompteBloque(2);
+//var_dump(getLogsConnexionParUtilisateur(4));
+//verifierCompteBloque(4);
 ?>
 <script type="text/javascript">
     $('#titrePage').text("Bomotique - Connexion")

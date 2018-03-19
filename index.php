@@ -4,8 +4,10 @@ session_start();
 require 'Modele/modele.php';
 require 'Modele/app_modele.php';
 require 'Modele/user_modele.php';
-require 'Controleur/user_controleur.php';
-require 'Controleur/controleur.php';
+require 'Controleur/user.php';
+require 'Controleur/principal.php';
+
+//set_error_handler('gestionnaireErreur');
 
 initialiserBD();
 
