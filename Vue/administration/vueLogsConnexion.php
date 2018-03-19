@@ -1,7 +1,7 @@
 <?php
 ob_start();
 
-require('Vue\administration\menuAdministration.php');
+require('Vue/administration/menuAdministration.php');
 ?>
 <script type="text/javascript">
 $('#titrePage').text("Bomotique - Logs de connexion");

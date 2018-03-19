@@ -17,10 +17,10 @@ $( document ).ready(function() {
 
   var myVar = setInterval(updtEtatLed, 5000);
 
-  async function updtEtatLed() {
+  function updtEtatLed() {
     $.get("index.php?action=pagePrincipale").then(function(page) {
-      $("#lblOnOff").html($(page).find("#lblOnOff").html())
-    })
+      $("#lblOnOff").html($(page).find("#lblOnOff").html());
+    });
   }
 
 
@@ -28,11 +28,11 @@ $( document ).ready(function() {
   //Actualisation du formulaire d'édition quand un utilisateur est sélectionné dans la liste
   $(document).on('change', "#listeUtilEdition", function () {
     //$('#listeUtilEdition').change(function () {
-    var iUtilID = $("#listeUtilEdition option:selected").val()
+    var iUtilID = $("#listeUtilEdition option:selected").val();
 
     $.each(lstUtilisateur, function (key, objUtil) {
       if (iUtilID == objUtil.numero) {
-        $('#nomUtil').val(objUtil.nomUtilisateur)
+        $('#nomUtil').val(objUtil.nomUtilisateur);
 
         if (objUtil.estAdministrateur == 1)
         {
@@ -43,11 +43,11 @@ $( document ).ready(function() {
           $('#adminUtil').prop('checked', false);
         }
 
-        $('#mdp').val("")
-        $('#vmdp').val("")
+        $('#mdp').val("");
+        $('#vmdp').val("");
       }
     })
-  })
+  });
 
   //Ordonner le tableau avec le script DataTables.net
   var table = $('#tableauLogsConnexion').DataTable();

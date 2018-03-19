@@ -22,20 +22,20 @@ function connexion() {
           $objParam->numero=null;
           $_SESSION['UtilisateurConnecte']=$objParam;
           //var_dump($_SESSION['UtilisateurConnecte']);
-          ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), true, false, null);
+          ajoutLogConnexion($empreinteClient,time(), true, false, null);
           require 'Vue/vuePrincipale.php';
         } else {
-          ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
+          ajoutLogConnexion($empreinteClient,time(), false, false, null);
           require 'Vue/vueConnexion.php';
           erreurConnexion("Veuillez ressaisir le mot de passe.");
         }
       } else {
-        ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
+        ajoutLogConnexion($empreinteClient,time(), false, false, null);
         require 'Vue/vueConnexion.php';
         erreurConnexion("Le captcha n'est pas valide !");
       }
     } else {
-      ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
+      ajoutLogConnexion($empreinteClient,time(), false, false, null);
       require 'Vue/vueConnexion.php';
       erreurConnexion("Veuillez ressaisir le mot de passe.");
     }
@@ -58,10 +58,10 @@ function connexion() {
                 $objParam->nomUtilisateur=$objUtil->nomUtilisateur;
                 $objParam->numero=$objUtil->numero;
                 $_SESSION['UtilisateurConnecte']=$objParam;
-                ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), true, false, $objUtil->numero);
+                ajoutLogConnexion($empreinteClient,time(), true, false, $objUtil->numero);
                 require 'Vue/vuePrincipale.php';
               } else {
-                ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, $objUtil->numero);
+                ajoutLogConnexion($empreinteClient,time(), false, false, $objUtil->numero);
                 require 'Vue/vueConnexion.php';
                 erreurConnexion("Veuillez ressaisir le mot de passe.");
               }
@@ -70,23 +70,23 @@ function connexion() {
               erreurConnexion("Ce compte utilisateur est bloqué. Veuillez réessayer plus tard.");
             }
           }else{
-            ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
+            ajoutLogConnexion($empreinteClient,time(), false, false, null);
             require 'Vue/vueConnexion.php';
             erreurConnexion("Veuillez ressaisir le mot de passe.");
           }
 
         } else {
-          ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
+          ajoutLogConnexion($empreinteClient,time(), false, false, null);
           require 'Vue/vueConnexion.php';
           erreurConnexion("Le captcha n'est pas valide !");
         }
       } else {
-        ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
+        ajoutLogConnexion($empreinteClient,time(), false, false, null);
         require 'Vue/vueConnexion.php';
         erreurConnexion("Veuillez ressaisir le mot de passe.");
       }
     }else{
-      ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, false, null);
+      ajoutLogConnexion($empreinteClient,time(), false, false, null);
       require 'Vue/vueConnexion.php';
       erreurConnexion("Entrez un nom d'utilisateur !");
     }
@@ -118,43 +118,43 @@ function connexionAdmin(){
                 $_SESSION['UtilisateurConnecte']=$objParam;
                 $_SESSION['modeAdmin']=1;
                 //var_dump($_SESSION['UtilisateurConnecte']);
-                ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), true, true, $objUtil->numero);
+                ajoutLogConnexion($empreinteClient,time(), true, true, $objUtil->numero);
                 require 'Vue/administration/vueAdministration.php';
               } else {
-                ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, $objUtil->numero);
+                ajoutLogConnexion($empreinteClient,time(), false, true, $objUtil->numero);
                 require 'Vue/vueConnexionAdmin.php';
                 erreurConnexion("Veuillez ressaisir le mot de passe.");
               }
             }else {
-              require 'Vue/vueConnexion.php';
+              require 'Vue/vueConnexionAdmin.php';
               erreurConnexion("Ce compte utilisateur est bloqué. Veuillez réessayer plus tard.");
             }
           }else{
-            ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, null);
+            ajoutLogConnexion($empreinteClient,time(), false, true, null);
             require 'Vue/vueConnexionAdmin.php';
             erreurConnexion("Veuillez ressaisir le mot de passe.");
           }
 
         } else {
-          ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, null);
+          ajoutLogConnexion($empreinteClient,time(), false, true, null);
           require 'Vue/vueConnexionAdmin.php';
           erreurConnexion("Le captcha n'est pas valide !");
         }
       } else {
-        ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, null);
+        ajoutLogConnexion($empreinteClient,time(), false, true, null);
         require 'Vue/vueConnexionAdmin.php';
         erreurConnexion("Veuillez ressaisir le mot de passe.");
       }
     }else
     {
-      ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, null);
+      ajoutLogConnexion($empreinteClient,time(), false, true, null);
       require 'Vue/vueConnexionAdmin.php';
       erreurConnexion("Veuillez ressaisir le mot de passe.");
     }
   }
   else
   {
-    ajoutLogConnexion($empreinteClient,date("Y-m-d H:i:s", time()), false, true, null);
+    ajoutLogConnexion($empreinteClient,time(), false, true, null);
     require 'Vue/vueConnexionAdmin.php';
     erreurConnexion("Veuillez ressaisir le mot de passe.");
   }
@@ -163,10 +163,10 @@ function connexionAdmin(){
 function verifierCompteBloque($idUtilisateur){
   $listeLogsUtil = getLogsConnexionParUtilisateur($idUtilisateur);
 
-if (isset($listeLogsUtil) == false)
-{
-  return false;
-}
+  if (isset($listeLogsUtil) == false)
+  {
+    return false;
+  }
 
   $parametreApplication = getInfoApplication();
 
@@ -209,7 +209,7 @@ if (isset($listeLogsUtil) == false)
   }
 
   $i+=1;
-  echo $i;
+
 
   if ($i >= $parametreApplication->nbTentative) {
 
@@ -219,16 +219,16 @@ if (isset($listeLogsUtil) == false)
 
     if ($diffTemps < $tempsBlocage)
     {
-      echo "BLOQUE";
+      //echo "BLOQUE";
       return true;
     }
     else {
-      echo "PAS BLOQUE";
+      //echo "PAS BLOQUE";
       return false;
     }
   }
   else {
-    echo "PAS BLOQUE 1";
+    //echo "PAS BLOQUE 1";
     return false;
   }
 

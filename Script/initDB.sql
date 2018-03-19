@@ -50,4 +50,4 @@ CREATE TABLE tbl_log_connexion(
 ALTER TABLE tbl_log_connexion ADD CONSTRAINT FK_LOG_CONNEXION_numero_UTILISATEUR FOREIGN KEY (num_tbl_utilisateur) REFERENCES tbl_utilisateur(numero);
 
 INSERT INTO tbl_utilisateur (numero,nomUtilisateur, motDePasse, estAdministrateur) VALUES (1,"admin", :mdp2 ,1);
-  INSERT INTO tbl_application (numero, estEnModePassword, motDePasse,tempsImpulsion,nbTentative,tempsBlocage,tempsIntervaleTentative) VALUES (1, 1, :mdp, 5000, 5, '00:30:00', '00:00:02');
+  INSERT INTO tbl_application (numero, estEnModePassword, motDePasse,tempsImpulsion,nbTentative,tempsBlocage,tempsIntervaleTentative) VALUES (1, 1, :mdp, 5000, 5, '00:30:00', '00:02:00');

@@ -8,6 +8,8 @@ require 'Controleur/user.php';
 require 'Controleur/principal.php';
 
 //set_error_handler('gestionnaireErreur');
+//POUR CHANGER LE FUSEAU HORAIRE
+date_default_timezone_set('Europe/Paris');
 
 initialiserBD();
 

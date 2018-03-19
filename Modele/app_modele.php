@@ -58,7 +58,7 @@ function addLogconnexion($empreinteClient, $dateHeure, $connexionReussie, $estAd
   . 'VALUES '
   . '('
   . ':client,'
-  . ':dateHeure,'
+  . 'DATE_FORMAT(FROM_UNIXTIME(:dateHeure), "%Y-%m-%d %H:%i:%s"),'
   . ':coReussie,'
   . ':estAdmin,'
   . ':numUtil'

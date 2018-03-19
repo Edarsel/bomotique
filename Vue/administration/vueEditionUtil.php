@@ -2,7 +2,7 @@
 ob_start();
 
 $listeUtilisateur;
-require('Vue\administration\menuAdministration.php');
+require('Vue/administration/menuAdministration.php');
 ?>
 <script type="text/javascript">
 $('#titrePage').text("Bomotique - Gestion Utilisateurs");
