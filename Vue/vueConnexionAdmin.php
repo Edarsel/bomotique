@@ -1,5 +1,6 @@
 <?php
-ob_start()
+ob_start();
+require 'Vue/modalAlert.php';
 ?>
 <script type="text/javascript">
     $('#titrePage').text("Bomotique - Connexion Administration")

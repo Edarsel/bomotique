@@ -74,6 +74,7 @@ $( document ).ready(function() {
     });
   });
 
+
   $('#supprLog').click(function () {
 
     $.ajax({
@@ -87,7 +88,6 @@ $( document ).ready(function() {
           $("#divTableauLogsConnexion").html($(page).find("#divTableauLogsConnexion").html());
           dataTableLog();
         })
-        //dataTableLog();
       }
     });
   });

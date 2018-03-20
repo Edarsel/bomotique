@@ -19,7 +19,7 @@ function supprimerLog(){
   delLogConnexion($dateDebut, $dateFin);
 }
 
-function LedImpulsion(){
+function ledImpulsion(){
   exec('echo out > /sys/class/gpio/gpio68/direction');
   $_SESSION['LED'] = (int)exec('cat /sys/class/gpio/gpio68/value');
 
@@ -31,7 +31,7 @@ function LedImpulsion(){
   exec('echo 0 > /sys/class/gpio/gpio68/value');
 }
 
-function LedOnOff(){
+function ledOnOff(){
   //Configuration en sortie du port
   exec('echo out > /sys/class/gpio/gpio68/direction');
 
@@ -299,7 +299,10 @@ function protectionXSS($var){
 }
 
 function gestionnaireErreur($errno, $errstr, $errfile, $errline){
-  echo "<img src='errorHandler.jpg'><br>";
+  echo "<img src='http://cpc.cx/lxu'><br>";
+  echo "Oups, vous n'êtiez pas sensé tombé sur ce b.. sur cette fonctionnalité qui encore en développement. Oui oui. <br><br>";
+  echo '<a href="index.php?action=pageConnexion">Je comprends. Je vais oublier tout ce qui s\'est passé et faire comme si de rien n\'était.</a>';
+  exit(1);
 
   return true;
 

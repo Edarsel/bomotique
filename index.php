@@ -1,13 +1,15 @@
 <?php
 session_start();
 
-require 'Modele/modele.php';
-require 'Modele/app_modele.php';
-require 'Modele/user_modele.php';
-require 'Controleur/user.php';
-require 'Controleur/principal.php';
+require_once 'Modele/modele.php';
+require_once 'Modele/app_modele.php';
+require_once 'Modele/user_modele.php';
+require_once 'Controleur/user.php';
+require_once 'Controleur/principal.php';
 
+//SAFE MODE
 //set_error_handler('gestionnaireErreur');
+
 //POUR CHANGER LE FUSEAU HORAIRE
 date_default_timezone_set('Europe/Paris');
 
@@ -85,10 +87,10 @@ if (isset($_SESSION['modeAdmin'])) {
         deconnexion();
         break;
         case "LedOnOff":
-        LedOnOff();
+        ledOnOff();
         break;
         case "Impulsion":
-        LedImpulsion();
+        ledImpulsion();
         break;
         default:
         pagePrincipale();

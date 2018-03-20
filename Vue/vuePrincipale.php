@@ -33,9 +33,6 @@ var contenuNavbar=$(`
 <br><br>
 
 <button type="button" id="btnImpulsion" class="btn btn-primary">Impulsion</button>
-<!-- <input type="text" id="tempsImpulsion" value="" placeholder="1000 millisecondes" /> -->
-
-<!--<button type="button" id="btnOff">Off</button>-->
 
 <br><br>
 
