@@ -74,6 +74,22 @@ function addLogconnexion($empreinteClient, $dateHeure, $connexionReussie, $estAd
   return $bdd->errorInfo();
 }
 
+function delLogConnexion($dateDebut, $dateFin) {
+
+  $bdd = getBdd();
+  $stmt = $bdd->prepare('DELETE FROM `tbl_log_connexion` WHERE dateHeure >= DATE(:dateDebut) AND dateHeure < (DATE(:dateFin) + INTERVAL 1 DAY)');
+
+  $stmt->bindParam(':dateDebut', $dateDebut, PDO::PARAM_STR);
+  $stmt->bindParam(':dateFin', $dateFin, PDO::PARAM_STR);
+
+  if ($stmt->execute()) {
+    echo "Les logs on été supprimés.";
+  } else {
+    echo "ERREUR : Les logs n'ont pas pu être supprimés de la base de données.";
+  }
+
+  return $bdd->errorInfo();
+}
 
 function getInfoApplication() {
   $bdd = getBdd();

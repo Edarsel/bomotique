@@ -24,6 +24,9 @@ if (isset($_SESSION['modeAdmin'])) {
       case "deconnexion":
       deconnexion();
       break;
+      case "supprimerLog":
+      supprimerLog();
+      break;
       case "enregistrerParamConnexion":
       enregistrerParamConnexion();
       break;

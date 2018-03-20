@@ -15,13 +15,36 @@ ob_start()
     </li>
     </ul>`);
     $('#nav-content').html(contenuNavbar);
+
+    var lstUtilisateur;
 </script>
 
 <div>
     <form method="post" action="index.php" autocomplete="off">
         <fieldset class="form-group">
             <label for="pseudo">Nom d'utilisateur :</label><br>
-            <input type="text" name="pseudo" id="pseudo" value="<?php echo $pseudo ?>" placeholder="Ex: DupontD"/>
+            <!-- <input type="text" name="pseudo" id="pseudo" value="<?php //echo $pseudo ?>" placeholder="Ex: DupontD"/> -->
+            <div>
+              <?php
+              $listeUtilisateur = getUtilisateurs();
+              ?>
+              <script type="text/javascript">
+              //Charge la liste des élèves de la classe dans une variable JS
+              lstUtilisateur = <?php echo json_encode($listeUtilisateur); ?>;
+              </script>
+              <select id="pseudo" name="pseudo" class="custom-select">
+                <option disabled value selected> -- Sélectionnez un utilisateur -- </option>
+                <?php
+                foreach ($listeUtilisateur as $objUtil) {
+                  $nomUtil = $objUtil->nomUtilisateur;
+                  $idUtil = $objUtil->numero;
+                  //var_dump($objUtil);
+                  echo '<option value="' . $idUtil . '" '.( $pseudo == $idUtil ? "selected " : "").'>' . $nomUtil . '</option> ';
+                }
+                ?>
+              </select>
+
+            </div>
         </fieldset>
 
         <fieldset class="form-group">

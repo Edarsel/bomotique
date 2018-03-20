@@ -49,7 +49,7 @@ function connexion() {
       if ((protectionXSS($_POST['pass'])) != "") {
         if (captchaValide()) {
           $mdp = $_POST['pass'];
-          $objUtil = getUtilisateur($pseudo);
+          $objUtil = getUtilisateurParID($pseudo);
           if ($objUtil){
             if (verifierCompteBloque($objUtil->numero) == false){
               if (password_verify($mdp, $objUtil->motDePasse)) {
@@ -107,7 +107,7 @@ function connexionAdmin(){
       if ((protectionXSS($_POST['pass'])) != "") {
         if (captchaValide()) {
           $mdp = $_POST['pass'];
-          $objUtil = getUtilisateur($pseudo);
+          $objUtil = getUtilisateurParID($pseudo);
           if ($objUtil){
             if (verifierCompteBloque($objUtil->numero) == false){
               if (password_verify($mdp, $objUtil->motDePasse) && $objUtil->estAdministrateur) {

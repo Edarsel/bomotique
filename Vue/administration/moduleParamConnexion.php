@@ -4,7 +4,7 @@
   <div class="custom-controls-stacked">
 
     <label class="custom-control custom-radio">
-      <input type="radio" name="modeConnexion" id="modeCoMDP" value="1" checked class="custom-control-input">
+      <input type="radio" name="modeConnexion" id="modeCoMDP" value="1" checked class="custom-control-input" <?= ( getModeConnexion() ? "checked='checked'" : "" ) ?> >
       <span class="custom-control-indicator"></span>
       <span class="custom-control-description">Mode Mot de Passe</span>
     </label>
@@ -17,7 +17,7 @@
     </fieldset>
 
     <label class="custom-control custom-radio">
-      <input type="radio" name="modeConnexion" id="modeCoUserMDP" value="0"class="custom-control-input">
+      <input type="radio" name="modeConnexion" id="modeCoUserMDP" value="0"class="custom-control-input" <?= ( !getModeConnexion() ? "checked='checked'" : "" ) ?>>
       <span class="custom-control-indicator"></span>
       <span class="custom-control-description">Mode Utilisateur/Mot de Passe</span>
     </label>

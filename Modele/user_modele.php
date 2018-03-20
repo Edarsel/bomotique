@@ -1,9 +1,18 @@
 <?php
 
-function getUtilisateur($strNomUtil) {
+function getUtilisateurParNom($strNomUtil) {
   $bdd = getBdd();
   $stmt = $bdd->prepare('SELECT * FROM `tbl_utilisateur` WHERE nomUtilisateur = :nomUtil');
   $stmt->bindParam(':nomUtil', $strNomUtil, PDO::PARAM_STR);
+  $stmt->execute();
+  $objUtilisateur = $stmt->fetch(PDO::FETCH_OBJ);
+  return $objUtilisateur;
+}
+
+function getUtilisateurParID($idUtil) {
+  $bdd = getBdd();
+  $stmt = $bdd->prepare('SELECT * FROM `tbl_utilisateur` WHERE numero = :idUtil');
+  $stmt->bindParam(':idUtil', $idUtil, PDO::PARAM_INT);
   $stmt->execute();
   $objUtilisateur = $stmt->fetch(PDO::FETCH_OBJ);
   return $objUtilisateur;

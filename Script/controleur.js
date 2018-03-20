@@ -17,13 +17,13 @@ $( document ).ready(function() {
 
   var myVar = setInterval(updtEtatLed, 5000);
 
+  dataTableLog();
+
   function updtEtatLed() {
     $.get("index.php?action=pagePrincipale").then(function(page) {
       $("#lblOnOff").html($(page).find("#lblOnOff").html());
     });
   }
-
-
 
   //Actualisation du formulaire d'édition quand un utilisateur est sélectionné dans la liste
   $(document).on('change', "#listeUtilEdition", function () {
@@ -50,12 +50,14 @@ $( document ).ready(function() {
   });
 
   //Ordonner le tableau avec le script DataTables.net
-  var table = $('#tableauLogsConnexion').DataTable();
-  //Trier les données du plus récent au plus vieux
-  table
-  .column( '0' )
-  .order( 'desc' )
-  .draw();
+  function dataTableLog() {
+    var table = $('#tableauLogsConnexion').DataTable();
+    //Trier les données du plus récent au plus vieux
+    table
+    .column( '0' )
+    .order( 'desc' )
+    .draw();
+  }
 
   $('#btnImpulsion').click(function () {
 
@@ -72,17 +74,35 @@ $( document ).ready(function() {
     });
   });
 
+  $('#supprLog').click(function () {
+
+    $.ajax({
+      url: 'index.php',
+      type: 'POST',
+      data: $('#formSupprLog').serialize(),
+      async: false,
+      success: function (response) {
+        alert(response);
+        $.get("index.php?action=pageLogsConnexion").then(function(page) {
+          $("#divTableauLogsConnexion").html($(page).find("#divTableauLogsConnexion").html());
+          dataTableLog();
+        })
+        //dataTableLog();
+      }
+    });
+  });
+
   $('#enrParamSecu').click(function () {
 
-      $.ajax({
-        url: 'index.php',
-        type: 'POST',
-        data: $('#formParamSecurite').serialize(),
-        async: false,
-        success: function (response) {
-          alert(response);
-        }
-      });
+    $.ajax({
+      url: 'index.php',
+      type: 'POST',
+      data: $('#formParamSecurite').serialize(),
+      async: false,
+      success: function (response) {
+        alert(response);
+      }
+    });
   });
 
   $('#enrImpulsLED').click(function () {

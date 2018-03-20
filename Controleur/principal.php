@@ -9,6 +9,16 @@ function initialiserBD() {
   initDB($strMdp);
 }
 
+function supprimerLog(){
+  $dateDebut = $_POST['dateDebut'];
+  $dateFin = $_POST['dateFin'];
+
+  echo $dateDebut;
+  echo $dateFin;
+
+  delLogConnexion($dateDebut, $dateFin);
+}
+
 function LedImpulsion(){
   exec('echo out > /sys/class/gpio/gpio68/direction');
   $_SESSION['LED'] = (int)exec('cat /sys/class/gpio/gpio68/value');
