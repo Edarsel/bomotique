@@ -176,70 +176,79 @@ function verifierCompteBloque($idUtilisateur, &$tempsRestant){
 
   $parametreApplication = getInfoApplication();
 
-  $tempsBlocage = date('1970-01-01 H:i:s',strtotime($parametreApplication->tempsBlocage));
-  $tempsIntervale = date('1970-01-01 H:i:s',strtotime($parametreApplication->tempsIntervaleTentative));
-
+  $tempsBlocage = new DateTime($parametreApplication->tempsBlocage);
+  $tempsIntervale = new DateTime($parametreApplication->tempsIntervaleTentative);
   $i=0;
   $finTentative = false;
 
   if (isset($listeLogsUtil[$i]) && isset($listeLogsUtil[$i+1]))
   {
-    $Temps = date("Y-m-d H:i:s", strtotime($listeLogsUtil[$i]->dateHeure));
-    $TempsPrecedent = date("Y-m-d H:i:s", strtotime($listeLogsUtil[$i+1]->dateHeure));
-    $diffTemps = $Temps - $TempsPrecedent;
+    $Temps = new DateTime($listeLogsUtil[$i]->dateHeure);
+    $TempsPrecedent = new DateTime($listeLogsUtil[$i+1]->dateHeure);
+    $diffTemps = date_diff($TempsPrecedent,$Temps);
 
     while ($finTentative == false) {
 
       if ($listeLogsUtil[$i]->connexionReussie) {
         $finTentative = true;
       }
-      else if ($diffTemps > $tempsIntervale) {
+      else if ($diffTemps->format('%Y%Y-%M-%D %H:%I:%S') > $tempsIntervale->format('0000-00-00 H:i:s')) {
         $finTentative = true;
       }
       else {
 
         $i+=1;
       }
-//echo $tempsIntervale."\n";
-//echo $diffTemps."\n";
+
+      // print_r($Temps->format('Y-m-d H:i:s')."<br>");
+      // print_r($TempsPrecedent->format('Y-m-d H:i:s')."<br>");
+      // print_r($tempsIntervale->format('0000-00-00 H:i:s')."<br>");
+      // print_r($diffTemps->format('%Y%Y-%M-%D %H:%I:%S')."<br>");
 
       if (isset($listeLogsUtil[$i]) && isset($listeLogsUtil[$i+1]))
       {
-        $Temps = date("Y-m-d H:i:s", strtotime($listeLogsUtil[$i]->dateHeure));
-        $TempsPrecedent = date("Y-m-d H:i:s", strtotime($listeLogsUtil[$i+1]->dateHeure));
-        $diffTemps = $Temps - $TempsPrecedent;
+        $Temps = new DateTime($listeLogsUtil[$i]->dateHeure);
+        $TempsPrecedent = new DateTime($listeLogsUtil[$i+1]->dateHeure);
+        $diffTemps = date_diff($TempsPrecedent,$Temps);
       }else{
         $finTentative = true;
       }
     }
   }
 
-  $i+=1;
+  //$i+=1;
   //echo $i;
-  //echo date("Y-m-d H:i:s");
   $tempsRestant = null;
 
+  //Si l'utilisateur a dépassé la limite de tentatives
   if ($i >= $parametreApplication->nbTentative) {
+    $Temps = new DateTime(date("Y-m-d H:i:s"));
+    $TempsPrecedent = new DateTime($listeLogsUtil[0]->dateHeure);
+    $diffTemps = date_diff($TempsPrecedent,$Temps);
 
-    $Temps = date("Y-m-d H:i:s");
-    $TempsPrecedent = date("Y-m-d H:i:s", strtotime($listeLogsUtil[0]->dateHeure));
-    $diffTemps = $Temps - $TempsPrecedent;
-
-    if ($diffTemps < $tempsBlocage)
+    //Si le dernier log ne dépasse pas le durée du blocage
+    if ($diffTemps->format('%Y%Y-%M-%D %H:%I:%S') < $tempsBlocage->format('0000-00-00 H:i:s'))
     {
-      // echo "BLOQUE";
+      //echo "BLOQUE";
 
-      $tempsRestant =  date("Y-m-d H:i:s", strtotime($listeLogsUtil[0]->dateHeure)) + $tempsBlocage - date("Y-m-d H:i:s");
-      $tempsRestant = date("H\h i\m s\s",$tempsRestant);
+      //Calcul du temps restant à afficher
+      $tempsRestant = new DateTime($listeLogsUtil[0]->dateHeure);
+      $tempsRestant = $tempsRestant->add(new DateInterval('PT'.$tempsBlocage->format('H').'H'.$tempsBlocage->format('i').'M'.$tempsBlocage->format('s').'S'));
+
+      $dateActuelle = new DateTime(date("Y-m-d H:i:s"));
+      $tempsRestant =  date_diff($tempsRestant,$dateActuelle);
+      $tempsRestant = $tempsRestant->format('%HH%IM:%SS');
+
+      //Le compte est bloqué
       return true;
     }
     else {
-      // echo "PAS BLOQUE";
+      //echo "PAS BLOQUE";
       return false;
     }
   }
   else {
-    // echo "PAS BLOQUE 1";
+    //echo "PAS BLOQUE 1";
     return false;
   }
 

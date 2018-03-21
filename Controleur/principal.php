@@ -13,8 +13,8 @@ function supprimerLog(){
   $dateDebut = $_POST['dateDebut'];
   $dateFin = $_POST['dateFin'];
 
-  echo $dateDebut;
-  echo $dateFin;
+  // echo $dateDebut;
+  // echo $dateFin;
 
   delLogConnexion($dateDebut, $dateFin);
 }

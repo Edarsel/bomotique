@@ -1,8 +1,9 @@
 <?php
 ob_start();
 require 'Vue/modalAlert.php';
-//var_dump(getLogsConnexionParUtilisateur(3));
-//echo verifierCompteBloque(3);
+//var_dump(getLogsConnexionParUtilisateur(2));
+$tempsRest;
+echo verifierCompteBloque(2,$tempsRest);
 ?>
 <script type="text/javascript">
 $('#titrePage').text("Bomotique - Connexion")
