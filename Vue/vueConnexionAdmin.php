@@ -57,7 +57,7 @@ require 'Vue/modalAlert.php';
             <!-- Captcha Google -->
             <div class="g-recaptcha" data-sitekey="6Le3mjkUAAAAAO8iqeRGS4LUlAGgSlhBJ574ZdPi"></div>
         </fieldset>
-
+            <input type="hidden" name="controleur" id="controleur" value="User">
             <input type="hidden" name="action" id="action" value="connexionAdmin">
             <input type='submit' name="envoyer" id="envoyer" value="Se connecter" class="btn btn-primary" />
 

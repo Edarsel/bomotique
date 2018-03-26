@@ -10,10 +10,10 @@
 
         if (isset($_POST['pseudo'])) {
           if ((is_null($_POST['pseudo'])) == false) {
-            $pseudo = protectionXSS($_POST['pseudo']);
+            $pseudo = controleurUser::protectionXSS($_POST['pseudo']);
             if (isset($_POST['pass'])) {
-              if ((is_null(protectionXSS($_POST['pass']))) == false) {
-                $mdp = protectionXSS($_POST['pass']);
+              if ((is_null(controleurUser::protectionXSS($_POST['pass']))) == false) {
+                $mdp = controleurUser::protectionXSS($_POST['pass']);
                 require_once 'Vue/vueConnexion.php';
               }
             }
@@ -30,10 +30,10 @@
 
       if (isset($_POST['pseudo'])) {
         if ((is_null($_POST['pseudo'])) == false) {
-          $pseudo = protectionXSS($_POST['pseudo']);
+          $pseudo = controleurUser::protectionXSS($_POST['pseudo']);
           if (isset($_POST['pass'])) {
-            if ((is_null(protectionXSS($_POST['pass']))) == false) {
-              $mdp = protectionXSS($_POST['pass']);
+            if ((is_null(controleurUser::protectionXSS($_POST['pass']))) == false) {
+              $mdp = controleurUser::protectionXSS($_POST['pass']);
               require 'Vue/vueConnexionAdmin.php';
             }
           }

@@ -2,11 +2,14 @@
 
 class controleurUser {
 
-  function connexion() {
+  public function connexion() {
     $pseudo = "";
     $mdp = "";
     $objUtil;
     $empreinteClient = $_SERVER['REMOTE_ADDR'];
+
+    var_dump($_POST['pseudo']);
+    var_dump($_POST['pass']);
 
     //Si vrai => Mode password
     if (!(isset($_POST['pseudo'])) && isset($_POST['pass']) && $_SESSION['modeConnexion'])
@@ -318,7 +321,7 @@ class controleurUser {
       return $googleResponse;
     }
 
-    function protectionXSS($var){
+    public static function protectionXSS($var){
       $var = trim($var);
 
       $var = strip_tags($var);

@@ -4,8 +4,10 @@
   // we consider those "allowed" values
   //CONTROLEURS ET ACTIONS AUTORISEES A ETRE APPELER
   //Les actions autorisées sont souvent des actions envoyées par des formulaires et par les requêtes AJAX
-  $controllers = array('Pages' => ['vueConnexion', 'vueConnexionAdmin', 'vuePrincipale'],
-                        'User' => ['connexion', 'connexionAdmin','deconnexion']);
+  $controllers = array('Pages' => ['vueConnexion', 'vueConnexionAdmin', 'vuePrincipale','vueAdministration','vueEditionUtil','vueLogsConnexion'],
+                        'User' => ['connexion', 'connexionAdmin','deconnexion'],
+                        'Administration' => ['supprimerLog', 'enregistrerParamConnexion', 'enregistrerParamLED','enregistrerParamSecurite','ajouterUtil','modifierUtil','supprimerUtil'],
+                        'Principal' => ['ledOnOff', 'ledImpulsion']);
 
   // check that the requested controller and action are both allowed
   // if someone tries to access something else he will be redirected to the error action of the pages controller
@@ -33,7 +35,14 @@
         // we need the model to query the database later in the controller
         $controller = new controleurUser();
       break;
-
+      case 'Administration':
+        // we need the model to query the database later in the controller
+        $controller = new controleurAdministration();
+      break;
+      case 'Principal':
+        // we need the model to query the database later in the controller
+        $controller = new controleurPrincipal();
+      break;
     }
 
     // call the action

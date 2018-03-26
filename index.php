@@ -9,12 +9,33 @@ require_once 'Controleur/controleurUser.php';
 require_once 'Controleur/controleurPrincipal.php';
 require_once 'Controleur/controleurAdministration.php';
 
+
+//POUR CHANGER LE FUSEAU HORAIRE
+date_default_timezone_set('Europe/Paris');
+
+initDB("Pass1234");
+$_SESSION['LED'] = (int) exec('cat /sys/class/gpio/gpio68/value');
+$_SESSION['modeConnexion'] = getModeConnexion();
+
+var_dump($_POST['controleur']);
+var_dump($_POST['action']);
+var_dump($_GET['controleur']);
+var_dump($_GET['action']);
+
 if (isset($_POST['controleur']) && isset($_POST['action'])) {
   $controller = $_POST['controleur'];
   $action     = $_POST['action'];
 } else {
-  $controller = 'pages';
-  $action     = 'home';
+  $controller = 'Pages';
+  $action     = 'vueConnexion';
+}
+
+if (isset($_GET['controleur']) && isset($_GET['action'])) {
+  $controller = $_GET['controleur'];
+  $action     = $_GET['action'];
+} else {
+  $controller = 'Pages';
+  $action     = 'vueConnexion';
 }
 
 require_once('routes.php');
