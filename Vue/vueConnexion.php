@@ -3,7 +3,7 @@ ob_start();
 require 'Vue/modalAlert.php';
 //var_dump(getLogsConnexionParUtilisateur(2));
 $tempsRest;
-echo verifierCompteBloque(2,$tempsRest);
+echo controleurUser::verifierCompteBloque(2,$tempsRest);
 ?>
 <script type="text/javascript">
 $('#titrePage').text("Bomotique - Connexion")
@@ -65,6 +65,7 @@ var contenuNavbar=$(`
       <div class="g-recaptcha" data-sitekey="6Le3mjkUAAAAAO8iqeRGS4LUlAGgSlhBJ574ZdPi"></div>
     </fieldset>
     <input type="hidden" name="action" id="action" value="connexion">
+    <input type="hidden" name="controleur" id="controleur" value="User">
     <input type='submit' name="connexionUtilisateur" id="connexionUtilisateur" value="Se connecter" class="btn btn-primary" />
   </form>
 

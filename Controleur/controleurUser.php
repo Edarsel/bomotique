@@ -11,8 +11,8 @@ class controleurUser {
     //Si vrai => Mode password
     if (!(isset($_POST['pseudo'])) && isset($_POST['pass']) && $_SESSION['modeConnexion'])
     {
-      if ((protectionXSS($_POST['pass'])) != "") {
-        if (captchaValide()) {
+      if ((self::protectionXSS($_POST['pass'])) != "") {
+        if (self::captchaValide()) {
           $mdp = $_POST['pass'];
           $objApp = getInfoApplication();
 
@@ -24,80 +24,80 @@ class controleurUser {
             $objParam->numero=null;
             $_SESSION['UtilisateurConnecte']=$objParam;
             //var_dump($_SESSION['UtilisateurConnecte']);
-            ajoutLogConnexion($empreinteClient,time(), true, false, null);
+            self::ajoutLogConnexion($empreinteClient,time(), true, false, null);
             require 'Vue/vuePrincipale.php';
           } else {
-            ajoutLogConnexion($empreinteClient,time(), false, false, null);
+            self::ajoutLogConnexion($empreinteClient,time(), false, false, null);
             require 'Vue/vueConnexion.php';
-            erreurConnexion("Veuillez resaisir le mot de passe.");
+            self::erreurConnexion("Veuillez resaisir le mot de passe.");
           }
         } else {
-          ajoutLogConnexion($empreinteClient,time(), false, false, null);
+          self::ajoutLogConnexion($empreinteClient,time(), false, false, null);
           require 'Vue/vueConnexion.php';
-          erreurConnexion("Le captcha n'est pas valide !");
+          self::erreurConnexion("Le captcha n'est pas valide !");
         }
       } else {
-        ajoutLogConnexion($empreinteClient,time(), false, false, null);
+        self::ajoutLogConnexion($empreinteClient,time(), false, false, null);
         require 'Vue/vueConnexion.php';
-        erreurConnexion("Veuillez resaisir le mot de passe.");
+        self::erreurConnexion("Veuillez resaisir le mot de passe.");
       }
     }
     //Si vrai => Mode utilisateur
     else if (isset($_POST['pseudo']) && isset($_POST['pass']) && !($_SESSION['modeConnexion']))
     {
-      if ((protectionXSS($_POST['pseudo'])) != "") {
-        $pseudo = protectionXSS(strtolower($_POST['pseudo']));
+      if ((self::protectionXSS($_POST['pseudo'])) != "") {
+        $pseudo = self::protectionXSS(strtolower($_POST['pseudo']));
         $objUtil = getUtilisateurParID($pseudo);
 
-        if ((protectionXSS($_POST['pass'])) != "") {
-          if (captchaValide()) {
+        if ((self::protectionXSS($_POST['pass'])) != "") {
+          if (self::captchaValide()) {
             $mdp = $_POST['pass'];
             if ($objUtil){
               $tempsRestant;
-              if (verifierCompteBloque($objUtil->numero,$tempsRestant) == false){
+              if (self::verifierCompteBloque($objUtil->numero,$tempsRestant) == false){
                 if (password_verify($mdp, $objUtil->motDePasse)) {
                   $objParam = new stdClass();
                   $objParam->estAdministrateur=$objUtil->estAdministrateur;
                   $objParam->nomUtilisateur=$objUtil->nomUtilisateur;
                   $objParam->numero=$objUtil->numero;
                   $_SESSION['UtilisateurConnecte']=$objParam;
-                  ajoutLogConnexion($empreinteClient,time(), true, false, $objUtil->numero);
+                  self::ajoutLogConnexion($empreinteClient,time(), true, false, $objUtil->numero);
                   require 'Vue/vuePrincipale.php';
                 } else {
-                  ajoutLogConnexion($empreinteClient,time(), false, false, $objUtil->numero);
+                  self::ajoutLogConnexion($empreinteClient,time(), false, false, $objUtil->numero);
                   require 'Vue/vueConnexion.php';
                   erreurConnexion("Veuillez resaisir le mot de passe.");
                 }
               }else {
                 require 'Vue/vueConnexion.php';
-                erreurConnexion("Ce compte utilisateur a été bloqué. Veuillez réessayer dans ".$tempsRestant." .");
+                self::erreurConnexion("Ce compte utilisateur a été bloqué. Veuillez réessayer dans ".$tempsRestant." .");
               }
             }else{
-              ajoutLogConnexion($empreinteClient,time(), false, false, $objUtil->numero);
+              self::ajoutLogConnexion($empreinteClient,time(), false, false, $objUtil->numero);
               require 'Vue/vueConnexion.php';
-              erreurConnexion("Veuillez resaisir le mot de passe.");
+              self::erreurConnexion("Veuillez resaisir le mot de passe.");
             }
 
           } else {
-            ajoutLogConnexion($empreinteClient,time(), false, false, $objUtil->numero);
+            self::ajoutLogConnexion($empreinteClient,time(), false, false, $objUtil->numero);
             require 'Vue/vueConnexion.php';
-            erreurConnexion("Le captcha n\'est pas valide !");
+            self::erreurConnexion("Le captcha n\'est pas valide !");
           }
         } else {
-          ajoutLogConnexion($empreinteClient,time(), false, false, $objUtil->numero);
+          self::ajoutLogConnexion($empreinteClient,time(), false, false, $objUtil->numero);
           require 'Vue/vueConnexion.php';
-          erreurConnexion("Veuillez resaisir le mot de passe.");
+          self::erreurConnexion("Veuillez resaisir le mot de passe.");
         }
       }else{
-        ajoutLogConnexion($empreinteClient,time(), false, false, null);
+        self::ajoutLogConnexion($empreinteClient,time(), false, false, null);
         require 'Vue/vueConnexion.php';
-        erreurConnexion("Choisissez un utilisateur !");
+        self::erreurConnexion("Choisissez un utilisateur !");
       }
     }
     else{
-      ajoutLogConnexion($empreinteClient,time(), false, false, null);
+      self::ajoutLogConnexion($empreinteClient,time(), false, false, null);
       require 'Vue/vueConnexion.php';
-      erreurConnexion("Choisissez un utilisateur !");
+      self::erreurConnexion("Choisissez un utilisateur !");
     }
   }
 
@@ -107,17 +107,17 @@ class controleurUser {
 
     if (isset($_POST['pseudo']) && isset($_POST['pass']))
     {
-      if ((protectionXSS($_POST['pseudo'])) != "") {
-        $pseudo = protectionXSS(strtolower($_POST['pseudo']));
+      if ((self::protectionXSS($_POST['pseudo'])) != "") {
+        $pseudo = self::protectionXSS(strtolower($_POST['pseudo']));
         $objUtil = getUtilisateurParID($pseudo);
 
-        if ((protectionXSS($_POST['pass'])) != "") {
-          if (captchaValide()) {
+        if ((self::protectionXSS($_POST['pass'])) != "") {
+          if (self::captchaValide()) {
             $mdp = $_POST['pass'];
 
             if ($objUtil){
               $tempsRestant;
-              if (verifierCompteBloque($objUtil->numero,$tempsRestant) == false){
+              if (self::verifierCompteBloque($objUtil->numero,$tempsRestant) == false){
                 if (password_verify($mdp, $objUtil->motDePasse) && $objUtil->estAdministrateur) {
                   $objParam = new stdClass();
                   $objParam->estAdministrateur=$objUtil->estAdministrateur;
@@ -126,49 +126,49 @@ class controleurUser {
                   $_SESSION['UtilisateurConnecte']=$objParam;
                   $_SESSION['modeAdmin']=1;
                   //var_dump($_SESSION['UtilisateurConnecte']);
-                  ajoutLogConnexion($empreinteClient,time(), true, true, $objUtil->numero);
+                  self::ajoutLogConnexion($empreinteClient,time(), true, true, $objUtil->numero);
                   require 'Vue/administration/vueAdministration.php';
                 } else {
-                  ajoutLogConnexion($empreinteClient,time(), false, true, $objUtil->numero);
+                  self::ajoutLogConnexion($empreinteClient,time(), false, true, $objUtil->numero);
                   require 'Vue/vueConnexionAdmin.php';
-                  erreurConnexion("Veuillez resaisir le mot de passe.");
+                  self::erreurConnexion("Veuillez resaisir le mot de passe.");
                 }
               }else {
                 require 'Vue/vueConnexionAdmin.php';
-                erreurConnexion("Ce compte utilisateur a été bloqué. Veuillez réessayer dans ".$tempsRestant." .");
+                self::erreurConnexion("Ce compte utilisateur a été bloqué. Veuillez réessayer dans ".$tempsRestant." .");
               }
             }else{
-              ajoutLogConnexion($empreinteClient,time(), false, true, $objUtil->numero);
+              self::ajoutLogConnexion($empreinteClient,time(), false, true, $objUtil->numero);
               require 'Vue/vueConnexionAdmin.php';
-              erreurConnexion("Veuillez resaisir le mot de passe.");
+              self::erreurConnexion("Veuillez resaisir le mot de passe.");
             }
 
           } else {
-            ajoutLogConnexion($empreinteClient,time(), false, true, $objUtil->numero);
+            self::ajoutLogConnexion($empreinteClient,time(), false, true, $objUtil->numero);
             require 'Vue/vueConnexionAdmin.php';
-            erreurConnexion("Le captcha n\'est pas valide !");
+            self::erreurConnexion("Le captcha n\'est pas valide !");
           }
         } else {
-          ajoutLogConnexion($empreinteClient,time(), false, true, $objUtil->numero);
+          self::ajoutLogConnexion($empreinteClient,time(), false, true, $objUtil->numero);
           require 'Vue/vueConnexionAdmin.php';
-          erreurConnexion("Veuillez resaisir le mot de passe.");
+          self::erreurConnexion("Veuillez resaisir le mot de passe.");
         }
       }else
       {
-        ajoutLogConnexion($empreinteClient,time(), false, true, null);
+        self::ajoutLogConnexion($empreinteClient,time(), false, true, null);
         require 'Vue/vueConnexionAdmin.php';
-        erreurConnexion("Veuillez resaisir le mot de passe.");
+        self::erreurConnexion("Veuillez resaisir le mot de passe.");
       }
     }
     else
     {
-      ajoutLogConnexion($empreinteClient,time(), false, true, null);
+      self::ajoutLogConnexion($empreinteClient,time(), false, true, null);
       require 'Vue/vueConnexionAdmin.php';
-      erreurConnexion("Veuillez resaisir le mot de passe.");
+      self::erreurConnexion("Veuillez resaisir le mot de passe.");
     }
   }
 
-  function verifierCompteBloque($idUtilisateur, &$tempsRestant){
+  public static function verifierCompteBloque($idUtilisateur, &$tempsRestant){
     $listeLogsUtil = getLogsConnexionParUtilisateur($idUtilisateur);
 
     if (isset($listeLogsUtil) == false)
