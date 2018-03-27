@@ -12,10 +12,10 @@ $('#titreContenu').text("Connexion")
 var contenuNavbar=$(`
   <ul class="navbar-nav">
   <li class="nav-item">
-  <a class="nav-link" href="index.php?action=pageConnexion">Connexion Utilisateur</a>
+  <a class="nav-link" href="index.php?controleur=Pages&action=vueConnexion">Connexion Utilisateur</a>
   </li>
   <li class="nav-item">
-  <a class="nav-link" href="index.php?action=pageConnexionAdmin">Connexion Administration</a>
+  <a class="nav-link" href="index.php?controleur=Pages&action=vueConnexionAdmin">Connexion Administration</a>
   </li>
   </ul>`);
   $('#nav-content').html(contenuNavbar);
@@ -69,9 +69,9 @@ var contenuNavbar=$(`
     <input type='submit' name="connexionUtilisateur" id="connexionUtilisateur" value="Se connecter" class="btn btn-primary" />
   </form>
 
-  <a href="index.php?action=pageConnexionAdmin">Page Administration</a>
+  <a href="index.php?controleur=Pages&action=vueConnexionAdmin">Page Administration</a>
 
 </div>
 <?php
 $contenu = ob_get_clean();
-require 'gabarit.php';
+require_once 'gabarit.php';

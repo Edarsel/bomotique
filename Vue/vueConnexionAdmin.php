@@ -9,10 +9,10 @@ require 'Vue/modalAlert.php';
     var contenuNavbar=$(`
     <ul class="navbar-nav">
     <li class="nav-item">
-    <a class="nav-link" href="index.php?action=pageConnexion">Connexion Utilisateur</a>
+    <a class="nav-link" href="index.php?controleur=Pages&action=vueConnexion">Connexion Utilisateur</a>
     </li>
     <li class="nav-item">
-    <a class="nav-link" href="index.php?action=pageConnexionAdmin">Connexion Administration</a>
+    <a class="nav-link" href="index.php?controleur=Pages&action=vueConnexionAdmin">Connexion Administration</a>
     </li>
     </ul>`);
     $('#nav-content').html(contenuNavbar);
@@ -63,7 +63,7 @@ require 'Vue/modalAlert.php';
 
     </form>
 
-    <a href="index.php?action=pageConnexion">Page Connexion Utilisateur</a>
+    <a href="index.php?controleur=Pages&action=vueConnexion">Page Connexion Utilisateur</a>
 
 </div>
 <?php

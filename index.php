@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+//SOURCE : http://requiremind.com/a-most-simple-php-mvc-beginners-tutorial/
+// https://apprendre-php.com/tutoriels/tutoriel-45-singleton-instance-unique-d-une-classe.html
+
+spl_autoload_register("autoloadFunction");
+
 require_once('Modele/connexionBD.php');
 require_once 'Modele/modele.php';
 require_once 'Modele/app_modele.php';
@@ -8,6 +13,7 @@ require_once 'Modele/user_modele.php';
 require_once 'Controleur/controleurUser.php';
 require_once 'Controleur/controleurPrincipal.php';
 require_once 'Controleur/controleurAdministration.php';
+require_once 'Controleur/controleurPages.php';
 
 
 //POUR CHANGER LE FUSEAU HORAIRE
@@ -17,29 +23,43 @@ initDB("Pass1234");
 $_SESSION['LED'] = (int) exec('cat /sys/class/gpio/gpio68/value');
 $_SESSION['modeConnexion'] = getModeConnexion();
 
-var_dump($_POST['controleur']);
-var_dump($_POST['action']);
-var_dump($_GET['controleur']);
-var_dump($_GET['action']);
+// //SAFE MODE
+// set_error_handler('gestionnaireErreur');
 
-if (isset($_POST['controleur']) && isset($_POST['action'])) {
-  $controller = $_POST['controleur'];
-  $action     = $_POST['action'];
-} else {
-  $controller = 'Pages';
-  $action     = 'vueConnexion';
+// var_dump($_POST['controleur']);
+// var_dump($_POST['action']);
+// var_dump($_GET['controleur']);
+// var_dump($_GET['action']);
+
+// if (isset($_POST['controleur']) && isset($_POST['action'])) {
+//   $controller = $_POST['controleur'];
+//   $action     = $_POST['action'];
+// } else {
+//   if (isset($_GET['controleur']) && isset($_GET['action'])) {
+//     $controller = $_GET['controleur'];
+//     $action     = $_GET['action'];
+//   } else {
+//     // $controller = 'Pages';
+//     // $action     = 'vueConnexion';
+//
+//
+//   }
+// }
+//
+// require_once('routes.php');
+
+$routeur = new controleurRouteur();
+$routeur->process(array($_SERVER['REQUEST_URI']));
+$routeur->renderView();
+
+function autoloadFunction($class)
+{
+        // Ends with a string "Controller"?
+    if (preg_match('/Controleur$/', $class))
+        require("Controleur/" . $class . ".php");
+    else
+        require("Modele/" . $class . ".php");
 }
-
-if (isset($_GET['controleur']) && isset($_GET['action'])) {
-  $controller = $_GET['controleur'];
-  $action     = $_GET['action'];
-} else {
-  $controller = 'Pages';
-  $action     = 'vueConnexion';
-}
-
-require_once('routes.php');
-
 
 
 

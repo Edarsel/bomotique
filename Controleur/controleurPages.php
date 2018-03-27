@@ -53,6 +53,35 @@
       }
     }
 
+    public function vueEditionUtil()
+    {
+      if ($_SESSION['UtilisateurConnecte']->estAdministrateur)
+      {
+        require 'Vue/administration/vueEditionUtil.php';
+      }else{
+        pageConnexion();
+      }
+    }
+
+    public function vueAdministration(){
+      if ($_SESSION['UtilisateurConnecte']->estAdministrateur)
+      {
+        require 'Vue/administration/vueAdministration.php';
+      }else{
+        pageConnexion();
+      }
+    }
+
+    public function vueLogsConnexion(){
+      if ($_SESSION['UtilisateurConnecte']->estAdministrateur)
+      {
+        $listeLogs = getLogsConnexion();
+        require 'Vue/administration/vueLogsConnexion.php';
+      }else{
+        pageConnexion();
+      }
+    }
+
     public function error() {
       require_once('views/pages/error.php');
     }

@@ -8,7 +8,7 @@ $('#titreContenu').text("Accueil");
 var contenuNavbar=$(`
   <ul class="navbar-nav">
   <li class="nav-item">
-  <a class="nav-link" href="index.php?action=deconnexion">Déconnexion</a>
+  <a class="nav-link" href="index.php?controleur=User&action=deconnexion">Déconnexion</a>
   </li>
   </ul>`);
   $('#nav-content').html(contenuNavbar);
@@ -39,4 +39,4 @@ var contenuNavbar=$(`
 
 <?php
 $contenu = ob_get_clean();
-require 'gabarit.php';
+require_once 'gabarit.php';

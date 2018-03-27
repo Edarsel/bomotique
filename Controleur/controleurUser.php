@@ -65,7 +65,9 @@ class controleurUser {
                   $objParam->numero=$objUtil->numero;
                   $_SESSION['UtilisateurConnecte']=$objParam;
                   self::ajoutLogConnexion($empreinteClient,time(), true, false, $objUtil->numero);
-                  require 'Vue/vuePrincipale.php';
+                  //require 'Vue/vuePrincipale.php';
+                  //controleurPages::vuePrincipale();
+                  header("Location: ?controleur=Pages&action=vuePrincipale");
                 } else {
                   self::ajoutLogConnexion($empreinteClient,time(), false, false, $objUtil->numero);
                   require 'Vue/vueConnexion.php';
