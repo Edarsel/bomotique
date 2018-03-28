@@ -34,7 +34,9 @@
           if (isset($_POST['pass'])) {
             if ((is_null(controleurUser::protectionXSS($_POST['pass']))) == false) {
               $mdp = controleurUser::protectionXSS($_POST['pass']);
+
               require 'Vue/vueConnexionAdmin.php';
+              require 'Vue/administration/menuAdministration.php';
             }
           }
         }

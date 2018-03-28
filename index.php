@@ -26,31 +26,32 @@ $_SESSION['modeConnexion'] = getModeConnexion();
 // //SAFE MODE
 // set_error_handler('gestionnaireErreur');
 
-// var_dump($_POST['controleur']);
-// var_dump($_POST['action']);
-// var_dump($_GET['controleur']);
-// var_dump($_GET['action']);
+var_dump($_POST['controleur']);
+var_dump($_POST['action']);
+var_dump($_GET['controleur']);
+var_dump($_GET['action']);
 
-// if (isset($_POST['controleur']) && isset($_POST['action'])) {
-//   $controller = $_POST['controleur'];
-//   $action     = $_POST['action'];
-// } else {
-//   if (isset($_GET['controleur']) && isset($_GET['action'])) {
-//     $controller = $_GET['controleur'];
-//     $action     = $_GET['action'];
-//   } else {
-//     // $controller = 'Pages';
-//     // $action     = 'vueConnexion';
-//
-//
-//   }
-// }
-//
-// require_once('routes.php');
+$controller;
+$action;
 
-$routeur = new controleurRouteur();
-$routeur->process(array($_SERVER['REQUEST_URI']));
-$routeur->renderView();
+if (isset($_POST['controleur']) && isset($_POST['action'])) {
+  $controller = $_POST['controleur'];
+  $action     = $_POST['action'];
+} else {
+  if (isset($_GET['controleur']) && isset($_GET['action'])) {
+    $controller = $_GET['controleur'];
+    $action     = $_GET['action'];
+  } else {
+    $controller = 'Pages';
+    $action     = 'vueConnexion';
+  }
+}
+
+require_once('routes.php');
+
+// $routeur = new controleurRouteur();
+// $routeur->process(array($_SERVER['REQUEST_URI']));
+// $routeur->renderView();
 
 function autoloadFunction($class)
 {
