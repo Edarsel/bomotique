@@ -1,6 +1,3 @@
-<?php
-ob_start();
-?>
 <script type="text/javascript">
 $('#titrePage').text("Bomotique - Accueil");
 $('#titreContenu').text("Accueil");
@@ -35,8 +32,3 @@ var contenuNavbar=$(`
 <button type="button" id="btnImpulsion" class="btn btn-primary">Impulsion</button>
 
 <br><br>
-
-
-<?php
-$contenu = ob_get_clean();
-require_once 'gabarit.php';

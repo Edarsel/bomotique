@@ -1,6 +1,18 @@
 <?php
 
-class controleurUser {
+class User extends Controller
+{
+
+  public function index($name='')
+     {
+        /* echo 'home/index<br />';
+         echo $name;*/
+         $this->view('template/header');
+         //$this->view('login/vueConnexion');
+         //$this->view('template/modalAlert');
+         $this->view('template/footer');
+
+     }
 
   public function connexion() {
     $pseudo = "";
@@ -173,15 +185,17 @@ class controleurUser {
     }
   }
 
-  public static function verifierCompteBloque($idUtilisateur, &$tempsRestant){
-    $listeLogsUtil = getLogsConnexionParUtilisateur($idUtilisateur);
+  function verifierCompteBloque($idUtilisateur, &$tempsRestant){
+    $userModel = $this->model('AppModel');
+
+    $listeLogsUtil = $userModel->getLogsConnexionParUtilisateur($idUtilisateur);
 
     if (isset($listeLogsUtil) == false)
     {
       return false;
     }
 
-    $parametreApplication = getInfoApplication();
+    $parametreApplication = $userModel->getInfoApplication();
 
     $tempsBlocage = new DateTime($parametreApplication->tempsBlocage);
     $tempsIntervale = new DateTime($parametreApplication->tempsIntervaleTentative);

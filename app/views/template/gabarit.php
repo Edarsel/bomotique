@@ -55,23 +55,23 @@
         </a>
         <div class="collapse navbar-collapse justify-content-end" id="nav-content">
 
-</div>
-</nav>
+        </div>
+      </nav>
 
-</header>
-<div id="contenu" class="card" >
-  <h2 class="card-header" id="titreContenu">Titre Page</h2>
-  <div class="card-body">
-    <?= $contenu ?>   <!-- Élément spécifique -->
-  </div>
-</div>
-<script>
-$('#contenu').hide();
-$('#contenu').show("fade", 500);
-</script>
-<footer id="piedBlog" class="fixed-bottom container-fluid">
-  Antoine Lestrade - CPLN - 2017
-</footer>
+    </header>
+    <div id="contenu" class="card" >
+      <h2 class="card-header" id="titreContenu">Titre Page</h2>
+      <div class="card-body">
+        <?= $contenu ?>   <!-- Élément spécifique -->
+      </div>
+    </div>
+    <script>
+    $('#contenu').hide();
+    $('#contenu').show("fade", 500);
+  </script>
+  <footer id="piedBlog" class="fixed-bottom container-fluid">
+    Antoine Lestrade - CPLN - 2017
+  </footer>
 </div> <!-- #global -->
 </body>
 </html>

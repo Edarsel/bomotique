@@ -1,9 +1,9 @@
 <?php
-ob_start();
-require 'Vue/modalAlert.php';
+
+
 //var_dump(getLogsConnexionParUtilisateur(2));
 $tempsRest;
-echo controleurUser::verifierCompteBloque(2,$tempsRest);
+echo $this->verifierCompteBloque(2,$tempsRest);
 ?>
 <script type="text/javascript">
 $('#titrePage').text("Bomotique - Connexion")
@@ -72,6 +72,3 @@ var contenuNavbar=$(`
   <a href="index.php?controleur=Pages&action=vueConnexionAdmin">Page Administration</a>
 
 </div>
-<?php
-$contenu = ob_get_clean();
-require_once 'gabarit.php';

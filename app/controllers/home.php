@@ -1,16 +1,18 @@
 <?php
 
-class controleurPrincipal {
+class Home extends Controller
+ {
   //echo "<h1>TEST CONTROLEUR !!!</h1>";
 
-  function initialiserBD() {
-    $controleurUser = new controleurUser();
+  public function index($name='')
+     {
+        /* echo 'home/index<br />';
+         echo $name;*/
+         $this->view('template/header');
+         $this->view('home/vuePrincipale');
+         $this->view('template/footer');
 
-    $strMdp="Pass1234";
-    $strMdp= $controleurUser->hashMotDePasse($strMdp);
-    //var_dump(initDB($strMdp));
-    initDB($strMdp);
-  }
+     }
 
   function ledImpulsion(){
     exec('echo out > /sys/class/gpio/gpio68/direction');

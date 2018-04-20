@@ -1,6 +1,7 @@
 <?php
 
-class controleurAdministration {
+class Administration extends Controller
+{
 
 
   function supprimerLog(){
